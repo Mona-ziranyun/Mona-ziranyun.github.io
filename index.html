@@ -167,6 +167,15 @@ p{margin:0}
 .media-grid .shot a.cover:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .media-grid .shot a.cover::after{content:"打开主页 ↗";position:absolute;right:12px;bottom:12px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
 .media-grid .shot a.cover:hover::after,.media-grid .shot a.cover:focus-visible::after{opacity:1}
+.works-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.works-row .shot a.cover{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);position:relative}
+.works-row .shot a.cover img{display:block;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.works-row .shot a.cover:hover img{transform:scale(1.02)}
+.works-row .shot a.cover:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.works-row .shot a.cover::after{content:"播放 ↗";position:absolute;right:10px;bottom:10px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
+.works-row .shot a.cover:hover::after,.works-row .shot a.cover:focus-visible::after{opacity:1}
+.works-row .pf-meta b{font-size:14px;line-height:1.5}
+@media (max-width:760px){.works-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
 .media-grid .more{display:flex;gap:12px;flex-wrap:wrap}
 .media-grid .more a{color:var(--amber);text-decoration:none}
 .media-grid .more a:hover{text-decoration:underline}
@@ -809,6 +818,18 @@ p{margin:0}
           <figcaption><span class="pf-meta"><b>公众号 · 自然云说</b><span>33 篇原创</span></span></figcaption></figure>
         <figure class="shot"><a class="cover" href="https://mp.weixin.qq.com/s/ScW28QlaGA72CmTsMCVC7A" target="_blank" rel="noopener"><img src="assets/web/media-5.jpg" alt="公众号 Joey说AI 发表记录" loading="lazy" width="1800" height="929"></a>
           <figcaption><span class="pf-meta"><b>公众号 · Joey说AI</b><span>7 篇文章 · AI 科普</span></span></figcaption></figure>
+      </div>
+
+      <div class="sub"><h3>代表作品 <span class="mono">4 WORKS · 抖音</span></h3></div>
+      <div class="works-row rv">
+        <figure class="shot"><a class="cover" href="https://v.douyin.com/52QbSP6jhvo/" target="_blank" rel="noopener"><img src="assets/web/work-1.jpg" alt="一年12个月吃什么菜？每个月记两样就够" loading="lazy" width="900" height="1200"></a>
+          <figcaption><span class="pf-meta"><b>一年12个月吃什么菜？每个月记两样就够</b><span>自然云聊健康 · 时令蔬菜</span></span></figcaption></figure>
+        <figure class="shot"><a class="cover" href="https://v.douyin.com/7mHOMYuuoZc/" target="_blank" rel="noopener"><img src="assets/web/work-2.jpg" alt="贵的坚果，真的更有营养吗？" loading="lazy" width="900" height="1200"></a>
+          <figcaption><span class="pf-meta"><b>贵的坚果，真的更有营养吗？</b><span>自然云聊健康 · 坚果科普</span></span></figcaption></figure>
+        <figure class="shot"><a class="cover" href="https://v.douyin.com/bOHXJ-gly14/" target="_blank" rel="noopener"><img src="assets/web/work-3.jpg" alt="别再一条条问AI了：飞书表格加一列，100条一次跑完" loading="lazy" width="900" height="1200"></a>
+          <figcaption><span class="pf-meta"><b>别再一条条问AI了：飞书表格加一列，100条一次跑完</b><span>Joey说AI · 飞书教程</span></span></figcaption></figure>
+        <figure class="shot"><a class="cover" href="https://v.douyin.com/UIA1klfxJc4/" target="_blank" rel="noopener"><img src="assets/web/work-4.jpg" alt="截止2026年，国内外的AI公司都有谁" loading="lazy" width="900" height="1200"></a>
+          <figcaption><span class="pf-meta"><b>截止2026年，国内外的AI公司都有谁</b><span>Joey说AI · 《回车之后》第 1 期</span></span></figcaption></figure>
       </div>
     </div>
   </section>
