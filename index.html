@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="方世云 · IP 编导 / 内容策划 作品集">
+<title>方世云作品集</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.cn">
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an editing-suite reel. Hero is a live audio waveform with a playhead; chapters follow how an IP video is made (调研 → 策划 → 脚本 → 系统 → AI). Every image appears once, at its own aspect ratio, never cropped. */
+:root{
+  --bg:#12100d; --bg-2:#1a1612; --panel:#201b16; --line:#352c23; --line-2:#4a3e31;
+  --ink:#f4ece2; --muted:#a99a8b; --faint:#706355;
+  --amber:#f2a24b; --amber-2:#ffcf8a; --amber-soft:rgba(242,162,75,.13); --rose:#ec8a72;
+  --wave:#3a3027;
+  --f-display:"Noto Serif SC","Songti SC","STSong",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f5efe7; --bg-2:#ede4d8; --panel:#fffaf3; --line:#dccfbe; --line-2:#c9b8a3;
+  --ink:#211912; --muted:#6c5d4e; --faint:#9e8f7e;
+  --amber:#b8650f; --amber-2:#d98a2b; --amber-soft:rgba(184,101,15,.10); --rose:#b2452c;
+  --wave:#d9ccbb; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f5efe7; --bg-2:#ede4d8; --panel:#fffaf3; --line:#dccfbe; --line-2:#c9b8a3;
+  --ink:#211912; --muted:#6c5d4e; --faint:#9e8f7e;
+  --amber:#b8650f; --amber-2:#d98a2b; --amber-soft:rgba(184,101,15,.10); --rose:#b2452c;
+  --wave:#d9ccbb; color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+[hidden]{display:none!important}
+
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:20;display:flex;justify-content:center;padding-block:14px;pointer-events:none}
+.nav ul{pointer-events:auto;list-style:none;margin:0;padding:5px;display:flex;gap:2px;overflow-x:auto;max-width:100%;scrollbar-width:none;
+  background:color-mix(in srgb,var(--bg-2) 78%,transparent);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);
+  border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{display:block;white-space:nowrap;text-decoration:none;font-size:14px;color:var(--muted);padding:7px 15px;border-radius:999px;transition:color .25s,background .25s}
+.nav a:hover{color:var(--ink)}
+.nav a.on{color:var(--bg);background:var(--amber)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 82%,transparent) 38%,transparent 78%),linear-gradient(180deg,transparent 55%,var(--bg))}
+.hero-in{position:relative;z-index:1;padding-block:150px 64px}
+.tc-row{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+.tc-row .rec{color:var(--rose);display:inline-flex;align-items:center;gap:8px}
+.tc-row .rec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rose);animation:blink 1.6s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+.hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(76px,15vw,196px);line-height:.92;letter-spacing:.02em;margin-top:28px}
+.hero h1 .ln{display:block;overflow:hidden;line-height:1.12;padding-block:.04em}
+.hero h1 .ln span{display:inline-block;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.hero h1 .ln:nth-child(2) span{animation-delay:.12s;color:var(--amber);font-size:.56em;letter-spacing:.08em}
+@keyframes rise{from{transform:translateY(105%)}}
+.hero-foot{margin-top:40px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px 56px;align-items:end}
+.lede{max-width:32em;color:var(--muted);font-size:18px;line-height:1.8}
+.lede b{color:var(--ink);font-weight:700}
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:15px;font-weight:500;padding:12px 24px;border-radius:999px;border:1px solid var(--line-2);transition:border-color .25s,transform .25s,background .25s}
+.btn:hover{border-color:var(--amber);transform:translateY(-2px)}
+.btn.primary{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.btn svg{width:14px;height:14px}
+
+/* ---------- Stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat{padding:30px 24px 28px;display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .v{font-family:var(--f-mono);font-size:clamp(24px,3.4vw,42px);font-weight:500;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat .v small{font-size:.42em;color:var(--muted);margin-left:4px;font-family:var(--f-body)}
+.stat .k{font-size:13px;color:var(--muted)}
+
+/* ---------- Keyword marquee ---------- */
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--bg-2);padding-block:18px}
+.mq-track{display:flex;width:max-content;animation:roll 48s linear infinite}
+.mq-track span{font-family:var(--f-display);font-weight:600;font-size:clamp(20px,2.4vw,28px);padding-inline:28px;white-space:nowrap;color:var(--muted);display:inline-flex;align-items:center;gap:56px}
+.mq-track span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber)}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* ---------- Moving reels (each image once; auto-scrolls back and forth) ---------- */
+.reel{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:4px max(16px,env(safe-area-inset-left,0px)) 8px;cursor:grab;
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.reel::-webkit-scrollbar{display:none}
+.reel.drag{cursor:grabbing}
+.reel.drag img{pointer-events:none}
+.reel-track{display:flex;gap:20px;width:max-content;align-items:flex-start}
+.reel-track .shot{width:clamp(180px,22vw,236px);flex:none}
+.reel-track.wide .shot{width:clamp(200px,24vw,272px)}
+.reel-track.land .shot{width:clamp(300px,58vw,640px)}
+.reel-track.land .shot button{border-radius:14px}
+.reel-track .shot button{border-radius:18px}
+.reel-ctrl{display:flex;gap:8px}
+.rc{font:inherit;font-size:20px;line-height:1;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);cursor:pointer;transition:border-color .2s,color .2s}
+.rc:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ---------- About (photo left, intro right) ---------- */
+.about{padding-block:96px 0}
+.about-tag{font-size:12px;letter-spacing:.14em;color:var(--amber);padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:40px}
+.about-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:40px 72px;align-items:center}
+.about-photo{margin:0;display:flex;flex-direction:column;gap:12px}
+.about-photo img{width:100%;height:auto;border-radius:22px;box-shadow:0 40px 80px -40px rgba(0,0,0,.65)}
+.about-photo figcaption{font-size:11px;letter-spacing:.12em;color:var(--faint)}
+.about-text{min-width:0;display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.about-exp{font-size:14px;color:var(--muted)}
+.about-text h2{font-family:var(--f-display);font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.15}
+.about-text > p{color:var(--muted);font-size:17px;max-width:30em}
+.about-proj{display:flex;flex-direction:column;gap:10px;width:100%;margin-top:6px}
+.about-proj .mono{font-size:12px;color:var(--faint);letter-spacing:.1em}
+.about-proj ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.about-proj li{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
+.about-proj li:last-child{border-bottom:1px solid var(--line)}
+.about-proj li b{font-size:16px;min-width:6em}
+.about-proj li span{font-size:14px;color:var(--muted)}
+.about-link{display:inline-flex;align-items:center;gap:10px;margin-top:8px;text-decoration:none;font-size:15px;font-weight:500;padding-bottom:4px;border-bottom:1px solid var(--line-2);transition:border-color .2s,color .2s}
+.about-link:hover{color:var(--amber);border-color:var(--amber)}
+.about-link svg{width:14px;height:14px}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr}.about-photo{max-width:420px}}
+
+/* ---------- Chapters ---------- */
+.chapter{padding-block:128px 0;position:relative}
+.ch-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 64px;margin-bottom:56px;align-items:end;position:relative}
+.ch-num{position:absolute;right:0;top:-70px;font-family:var(--f-mono);font-size:clamp(90px,14vw,180px);line-height:1;color:transparent;-webkit-text-stroke:1px var(--line-2);pointer-events:none;user-select:none}
+.ch-tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;display:flex;gap:14px}
+.ch-tag span{color:var(--faint)}
+.ch-head h2{font-family:var(--f-display);font-weight:900;font-size:clamp(38px,5.4vw,64px);line-height:1.12;letter-spacing:.01em}
+.ch-head p{color:var(--muted);font-size:17px;max-width:34em}
+
+.sub{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px;margin:72px 0 24px}
+.sub.first{margin-top:0}
+.sub h3{font-size:22px;font-weight:700;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sub h3 .mono{font-size:12px;color:var(--faint);letter-spacing:.1em;font-weight:400}
+.sub-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+
+/* figures: always natural aspect ratio */
+.shot{margin:0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.shot button{all:unset;cursor:zoom-in;display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);position:relative}
+.shot button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.shot button img{width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.shot button:hover img{transform:scale(1.015)}
+.shot button::after{content:"点击放大";position:absolute;right:12px;bottom:12px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
+.shot button:hover::after{opacity:1}
+.shot figcaption{font-size:14px;color:var(--muted);display:flex;gap:12px;align-items:baseline}
+.shot figcaption .mono{color:var(--amber);font-size:11px;flex:none;letter-spacing:.06em}
+
+.grid-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.grid-side{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:start}
+.stack{display:flex;flex-direction:column;gap:24px;min-width:0}
+
+/* platform matrix: phone screenshots shown whole */
+.phones{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;align-items:start}
+.phones.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.phones .shot button{border-radius:18px}
+.pf-meta{display:flex;flex-direction:column;gap:2px}
+.pf-meta b{font-size:15px;color:var(--ink)}
+.pf-meta span{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.shot.star button{border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-soft)}
+
+.lead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:end;padding:36px;border-radius:20px;background:linear-gradient(135deg,var(--amber-soft),transparent 70%),var(--panel);border:1px solid var(--line);margin-bottom:28px}
+.lead .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--faint)}
+.lead h3{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.3;margin-top:10px}
+.lead p{margin-top:14px;color:var(--muted);max-width:36em}
+.lead .nums{display:flex;gap:40px}
+.lead .nums div{display:flex;flex-direction:column}
+.lead .nums .v{font-family:var(--f-mono);font-size:clamp(34px,4.4vw,52px);color:var(--amber);line-height:1.05}
+.lead .nums .k{font-size:13px;color:var(--muted)}
+
+/* audience */
+.insights{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:32px}
+.insights div{background:var(--bg-2);padding:24px;display:flex;flex-direction:column;gap:8px}
+.insights .v{font-family:var(--f-mono);font-size:30px;line-height:1.15;color:var(--ink)}
+.insights .k{font-size:13px;color:var(--muted)}
+
+/* tabs */
+.tabs{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--bg-2)}
+.tabs button{font:inherit;font-size:14px;border:0;background:transparent;color:var(--muted);padding:7px 16px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.panel{animation:fade .45s ease both}
+@keyframes fade{from{opacity:.2;transform:translateY(8px)}}
+
+/* text points */
+.points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.points.col{grid-template-columns:1fr;margin-top:0}
+.point{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--bg-2);display:flex;flex-direction:column;gap:6px}
+.point .mono{font-size:11px;color:var(--amber);letter-spacing:.1em}
+.point b{font-size:16px}
+.point p{font-size:14px;color:var(--muted)}
+
+.tiers{display:flex;flex-wrap:wrap;gap:10px}
+.tier{font-size:13px;padding:5px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tier b{color:var(--ink);font-family:var(--f-mono);font-weight:500;margin-left:6px}
+
+/* recording-first blocks: big player, small thumbnail */
+.rec-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:28px;align-items:start}
+.player{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 30px 60px -36px rgba(0,0,0,.6)}
+.player video{display:block;width:100%;height:auto}
+.vlabel{position:absolute;left:14px;top:14px;z-index:1;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;background:rgba(0,0,0,.62);color:#f4ece2;padding:4px 10px;border-radius:999px;pointer-events:none;display:inline-flex;align-items:center;gap:7px}
+.vlabel::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--rose)}
+.thumb .shot button{border-radius:12px}
+.thumb .shot figcaption{font-size:13px;flex-direction:column;gap:4px}
+@media (max-width:980px){
+  .rec-grid{grid-template-columns:1fr}
+  .thumb{max-width:260px}
+  #brainPoints{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:640px){#brainPoints{grid-template-columns:1fr!important}}
+
+/* github repos */
+.repos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;min-width:0}
+@media (max-width:980px){.repos{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.repos{grid-template-columns:1fr}}
+.repo{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);text-decoration:none;transition:border-color .2s,transform .2s}
+.repo:hover{border-color:var(--amber);transform:translateX(3px)}
+.repo b{font-family:var(--f-mono);font-size:13px;font-weight:500;color:var(--amber);word-break:break-all}
+.repo p{font-size:13px;color:var(--muted);line-height:1.55}
+.repo .mono{font-size:11px;color:var(--faint)}
+
+/* play button */
+.play{font:inherit;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+  background:var(--amber);color:var(--bg);border:0;border-radius:999px;padding:8px 18px 8px 9px;transition:transform .25s}
+.play:hover{transform:translateY(-2px)}
+.play i{width:24px;height:24px;border-radius:50%;background:var(--bg);position:relative;flex:none}
+.play i::after{content:"";position:absolute;left:9px;top:7px;border-left:8px solid var(--amber);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--amber);text-decoration:none;border-bottom:1px solid transparent}
+.link:hover{border-bottom-color:var(--amber)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.flow .node{padding:22px 18px;display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--line);position:relative;background:var(--bg-2)}
+.flow .node:first-child{border-left:0}
+.flow .node .mono{font-size:11px;color:var(--amber)}
+.flow .node b{font-size:15px}
+.flow .node p{font-size:13px;color:var(--muted)}
+.flow .node.end{background:var(--amber-soft)}
+.flow-loop{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
+.flow-loop::before{content:"↺";color:var(--amber);font-size:20px}
+
+/* milestones */
+.ms-scroll{overflow-x:auto;padding-bottom:8px}
+.ms{display:grid;grid-template-columns:repeat(8,minmax(132px,1fr));min-width:1060px;position:relative}
+.ms::before{content:"";position:absolute;left:0;right:0;top:40px;border-top:1px dashed var(--line-2)}
+.ms-item{display:flex;flex-direction:column;gap:10px;padding-right:16px}
+.ms-item .when{font-family:var(--f-mono);font-size:12px;color:var(--faint);height:24px}
+.ms-item .dot{width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--muted);position:relative;z-index:1}
+.ms-item.hot .dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 6px var(--amber-soft)}
+.ms-item b{font-size:15px;line-height:1.4}
+.ms-item p{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* jobs */
+.jobs{display:flex;flex-direction:column}
+.job{display:grid;grid-template-columns:220px minmax(0,1fr);gap:8px 48px;padding:30px 0;border-top:1px solid var(--line)}
+.job:last-child{border-bottom:1px solid var(--line)}
+.job .when{font-family:var(--f-mono);font-size:13px;color:var(--faint);padding-top:4px}
+.job h3{font-size:20px;font-weight:700}
+.job h3 span{font-weight:400;font-size:14px;color:var(--muted);margin-left:10px}
+.job p{margin-top:10px;color:var(--muted);font-size:15px;max-width:46em}
+.job .kpi{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.job .kpi span{font-family:var(--f-mono);font-size:12px;padding:3px 10px;border-radius:6px;background:var(--amber-soft);color:var(--amber)}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;border-top:1px solid var(--line)}
+.skill{padding:22px 24px 22px 0;border-bottom:1px solid var(--line)}
+.skill b{font-size:15px}
+.skill p{font-size:14px;color:var(--muted);margin-top:4px}
+
+/* tools */
+.tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.tool{display:flex;flex-direction:column;gap:16px;padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--panel);min-width:0}
+.tool header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tool h3{font-family:var(--f-display);font-size:28px;font-weight:900}
+.tool p{font-size:14px;color:var(--muted)}
+
+/* footer */
+.foot{margin-top:140px;border-top:1px solid var(--line);padding-block:80px 56px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+.foot h2{font-family:var(--f-display);font-weight:900;font-size:clamp(40px,6.4vw,80px);line-height:1.1}
+.foot h2 span{color:var(--amber)}
+.contact{display:flex;flex-direction:column;gap:12px}
+.contact .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:15px}
+.contact .row .k{font-family:var(--f-mono);font-size:12px;color:var(--faint);width:56px}
+.contact .row .val{font-family:var(--f-mono);user-select:all;word-break:break-all}
+.copy{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:6px;padding:2px 10px;cursor:pointer}
+.copy:hover{color:var(--amber);border-color:var(--amber)}
+.fine{margin-top:56px;font-family:var(--f-mono);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;letter-spacing:.08em}
+
+/* reveal: content is visible at rest; JS only adds a gentle lift for items below the fold */
+.rv{transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s}
+.rv.pre{transform:translateY(28px);opacity:.35}
+
+/* overlays */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,8,6,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  padding:max(24px,env(safe-area-inset-top,0px)) max(64px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(64px,env(safe-area-inset-left,0px))}
+.lb img,.lb video{max-width:100%;max-height:calc(100% - 64px);object-fit:contain;border-radius:8px}
+.lb video{background:#000}
+.lb p{color:#d9cbbb;font-size:14px;text-align:center;max-width:60em}
+.lb .x{position:absolute;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.lb .arrow{position:absolute;top:50%;transform:translateY(-50%)}
+.lb .prev{left:max(10px,env(safe-area-inset-left,0px))}
+.lb .next{right:max(10px,env(safe-area-inset-right,0px))}
+.lb .x,.lb .arrow{background:rgba(255,255,255,.12);border:0;color:#fff;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+.lb .x:hover,.lb .arrow:hover{background:rgba(255,255,255,.22)}
+
+@media (prefers-reduced-motion:reduce){
+  .tc-row .rec::before,.mq-track,.hero h1 .ln span,.panel{animation:none}
+  .rv,.rv.pre{transition:none;transform:none;opacity:1}
+}
+
+/* resume viewer */
+.cv{position:fixed;inset:0;z-index:60;background:rgba(10,8,6,.94);display:flex;flex-direction:column}
+.cv-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#d9cbbb;font-size:12px;letter-spacing:.12em;
+  padding:max(12px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}
+.cv-bar .x{background:rgba(255,255,255,.12);border:0;color:#fff;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+.cv-bar .x:hover{background:rgba(255,255,255,.22)}
+.cv-scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 max(16px,env(safe-area-inset-right,0px)) max(32px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.cv-scroll img{width:min(880px,100%);margin:0 auto;border-radius:6px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);background:#fff}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .hero-foot,.ch-head,.grid-side,.foot-grid,.lead{grid-template-columns:1fr}
+  .cta{justify-content:flex-start}
+  .phones{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .phones.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .job{grid-template-columns:1fr}
+  .insights{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .points,.skills{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .flow .node:nth-child(4){border-left:0}
+  .flow .node:nth-child(n+4){border-top:1px solid var(--line)}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .hero-in{padding-top:120px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:20px 14px}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .phones{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-2,.tools{grid-template-columns:1fr}
+  .points,.skills{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow .node:nth-child(odd){border-left:0}
+  .flow .node:nth-child(4){border-left:1px solid var(--line)}
+  .flow .node:nth-child(n+3){border-top:1px solid var(--line)}
+  .lead{padding:22px}
+  .chapter{padding-top:96px}
+  .lb{padding-left:12px;padding-right:12px}
+}
+</style>
+</head>
+<body>
+
+
+<nav class="nav gutter" aria-label="章节导航">
+  <ul id="navlist">
+    <li><a href="#top">首页</a></li>
+    <li><a href="#about">关于我</a></li>
+    <li><a href="#account">账号</a></li>
+    <li><a href="#audience">受众</a></li>
+    <li><a href="#plan">策划</a></li>
+    <li><a href="#script">脚本</a></li>
+    <li><a href="#system">素材库</a></li>
+    <li><a href="#method">方法论</a></li>
+    <li><a href="#ai">AI</a></li>
+    <li><a href="#media">自媒体</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+  <!-- HERO: live waveform -->
+  <header class="hero">
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <div class="hero-in gutter">
+      <div class="wrap">
+        <div class="tc-row"><span class="rec">REC</span><span>Portfolio · 2026</span><span id="tc">TC 00:00:00:00</span></div>
+        <h1><span class="ln"><span>方世云</span></span><span class="ln"><span>IP 编导 · 内容策划</span></span></h1>
+        <div class="hero-foot">
+          <p class="lede">4 年 IP 内容运营，主做<b>女性成长、职场处世</b>与健康内容。从受众调研、竞品拆解、选题库到脚本分镜和数据复盘全流程负责，任职期间把创始人 IP「千千sherry」从 <b>1 万粉做到 100 万粉</b>。</p>
+          <div class="cta">
+            <a class="btn primary" href="#account">查看作品
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 2v10M3 8l4 4 4-4"/></svg></a>
+            <a class="btn" href="#cv" data-resume>完整简历
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="gutter">
+    <section class="wrap stats" aria-label="核心数据">
+      <div class="stat"><span class="v" data-count="100">100<small>万+</small></span><span class="k">IP 粉丝突破 · 2026.04</span></div>
+      <div class="stat"><span class="v">6.96<small>亿</small></span><span class="k">任职期累计播放</span></div>
+      <div class="stat"><span class="v">1456.86<small>万</small></span><span class="k">任职期累计获赞</span></div>
+      <div class="stat"><span class="v">1.54<small>亿</small></span><span class="k">单条最高播放</span></div>
+    </section>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track" id="mq"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about gutter" id="about" aria-label="关于我">
+    <div class="wrap">
+      <div class="about-tag mono">00 · 关于我</div>
+      <div class="about-grid rv">
+        <figure class="about-photo">
+          <img src="assets/web/portrait.jpg" alt="方世云的照片" width="1094" height="1400">
+          <figcaption class="mono">FANG SHIYUN · IP 编导</figcaption>
+        </figure>
+        <div class="about-text">
+          <span class="about-exp">6 年工作经验 · 4 年 IP 内容</span>
+          <h2>IP 编导 · 内容策划</h2>
+          <p>做女性成长、职场处世和健康类 IP 内容。负责受众调研、选题、脚本分镜、拍摄协作和数据复盘，也用 AI 把重复的活做成工具。</p>
+          <div class="about-proj">
+            <span class="mono">参与项目</span>
+            <ul>
+              <li><b>千千sherry</b><span>选题策划 · 脚本分镜 · 剪辑复盘 · 商单</span></li>
+              <li><b>沐辰健康</b><span>健康口播选题 · 大纲 · 口播剪辑</span></li>
+            </ul>
+          </div>
+          <a class="about-link" href="#cv" data-resume>查看完整简历
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 ACCOUNT -->
+  <section class="chapter gutter" id="account">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">01</span>
+        <div><div class="ch-tag">CH.01<span>Account</span></div><h2>千千sherry<br>全平台账号</h2></div>
+        <p>素肌良品创始人 IP，福布斯 U30 与胡润 U30 上榜者。内容主线是女性成长与处世，抖音为主阵地，同步分发小红书、B 站、视频号和微博。</p>
+      </div>
+
+      <div class="sub first"><h3>多平台主页 <span class="mono">5 PLATFORMS</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelA" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelA" data-step="1" aria-label="向右">›</button></div></div>
+      <div class="reel rv" id="reelA" data-dir="1"><div class="reel-track wide" data-gallery>
+        <figure class="shot"><button type="button"><img src="assets/web/01.jpg" alt="抖音主页" loading="lazy" width="720" height="1600"></button>
+          <figcaption><span class="pf-meta"><b>抖音</b><span>111.3万粉 · 1517.2万赞</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/02.jpg" alt="小红书主页" loading="lazy" width="720" height="1600"></button>
+          <figcaption><span class="pf-meta"><b>小红书</b><span>26.1万粉 · 358.9万赞藏</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/03.jpg" alt="B站主页" loading="lazy" width="720" height="1600"></button>
+          <figcaption><span class="pf-meta"><b>B 站</b><span>13.8万粉 · 176.5万赞</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/04.jpg" alt="视频号主页" loading="lazy" width="720" height="1600"></button>
+          <figcaption><span class="pf-meta"><b>视频号</b><span>211 条原创内容</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/05.jpg" alt="微博主页" loading="lazy" width="720" height="1600"></button>
+          <figcaption><span class="pf-meta"><b>微博</b><span>视频同步分发</span></span></figcaption></figure>
+      </div></div>
+
+      <div class="sub"><h3>爆款作品 <span class="mono">8 HITS · 抖音</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelB" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelB" data-step="1" aria-label="向右">›</button></div></div>
+      <div class="lead rv">
+        <div>
+          <span class="eyebrow">SIGNATURE · 合集《如何戒掉弱者气息》</span>
+          <h3>《戒掉弱者感！养成女帝心态！》</h3>
+          <p>单条播放约占任职期总播放的 22%。用「当你感觉被冒犯」这类具体场景开头，正反示范推进，结尾落到一个马上能用的动作。下方高亮的一张就是它。</p>
+        </div>
+        <div class="nums">
+          <div><span class="v">1.54亿</span><span class="k">播放</span></div>
+          <div><span class="v">429.7万</span><span class="k">点赞</span></div>
+        </div>
+      </div>
+      <div class="reel rv" id="reelB" data-dir="-1"><div class="reel-track" data-gallery>
+        <figure class="shot star"><button type="button"><img src="assets/web/16.jpg" alt="如何戒掉身上的弱者气息 · 拒绝非友善目光" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">429.7万赞</span>弱者气息 · 拒绝非友善目光</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/17.jpg" alt="父母学校没教的处世法则 · 出门在外身份是自己给的" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">111.9万赞</span>处世法则 · 身份是自己给的</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/10.jpg" alt="如何戒掉身上的弱者气息 · 社交交谈" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">31.8万赞</span>弱者气息 · 社交交谈时</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/15.jpg" alt="如何戒掉身上的弱者气息 · 表达主见" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">17.8万赞</span>弱者气息 · 表达主见</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/11.jpg" alt="父母学校没教的餐桌礼仪 · 座位要选对" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">合集</span>餐桌礼仪 · 座位要选对</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/14.jpg" alt="父母学校没教的餐桌礼仪 · 朋友请客" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">合集</span>餐桌礼仪 · 朋友请客</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/12.jpg" alt="如何戒掉身上的弱者气息 · 不主动求助" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">合集</span>弱者气息 · 不主动求助</figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/13.jpg" alt="父母学校没教的人情世故 · 同龄聊小事" loading="lazy" width="720" height="1600"></button><figcaption><span class="mono">合集</span>人情世故 · 同龄聊小事</figcaption></figure>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 03 AUDIENCE -->
+  <section class="chapter gutter" id="audience">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">02</span>
+        <div><div class="ch-tag">CH.02<span>Research</span></div><h2>受众画像<br>与竞品拆解</h2></div>
+        <p>先搞清楚谁在看，再看同赛道的人在怎么做。数据来自抖音热点中心和星图连接用户画像。</p>
+      </div>
+
+      <div class="insights rv">
+        <div><span class="v">61.1%</span><span class="k">女性粉丝占比</span></div>
+        <div><span class="v">31–40岁</span><span class="k">占比最高，24–30 岁偏好度最高</span></div>
+        <div><span class="v">15.6%</span><span class="k">广东粉丝占比，地域第一</span></div>
+        <div><span class="v">新锐白领</span><span class="k">八大人群第一，其次小镇青年、精致妈妈</span></div>
+      </div>
+
+      <div class="stack" data-gallery>
+        <figure class="shot rv"><button type="button"><img src="assets/web/06.jpg" alt="抖音热点中心粉丝画像" loading="lazy" width="1800" height="1353"></button>
+          <figcaption><span class="mono">FIG.1</span>粉丝地域、城市等级、性别与年龄分布（抖音热点中心）</figcaption></figure>
+        <div class="grid-side rv">
+          <figure class="shot"><button type="button"><img src="assets/web/07.jpg" alt="星图连接用户来源与画像" loading="lazy" width="1096" height="1600"></button>
+            <figcaption><span class="mono">FIG.2</span>星图连接用户：星图视频带来 87.2% 流量</figcaption></figure>
+          <div class="stack">
+            <figure class="shot"><button type="button"><img src="assets/web/08.jpg" alt="八大人群占比" loading="lazy" width="1800" height="596"></button>
+              <figcaption><span class="mono">FIG.3</span>八大人群占比</figcaption></figure>
+            <div class="points col">
+              <div class="point"><span class="mono">INSIGHT 01</span><b>她是 30 岁上下的职场女性</b><p>女性六成，31–40 岁最多，新锐白领第一。选题落在职场处世、人情世故和自我成长。</p></div>
+              <div class="point"><span class="mono">INSIGHT 02</span><b>流量主要来自星图</b><p>87.2% 来自星图视频，内容一级标签集中在情感、自我成长，商单要贴着这条线做。</p></div>
+              <div class="point"><span class="mono">INSIGHT 03</span><b>新一线与广东是基本盘</b><p>广东占比和偏好度都高，场景和口吻可以更贴近城市白领的日常。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub"><h3>竞品账号分析 <span class="mono">31 ACCOUNTS</span></h3>
+        <div class="tiers"><span class="tier">头部<b>13</b></span><span class="tier">腰部<b>14</b></span><span class="tier">黑马<b>4</b></span></div></div>
+      <div data-gallery class="rv">
+        <figure class="shot"><button type="button"><img src="assets/web/09.jpg" alt="女性成长赛道竞品账号表" loading="lazy" width="1800" height="1263"></button>
+          <figcaption><span class="mono">TABLE</span>女性成长赛道对标账号库：按头部、腰部、黑马分层，记录粉丝、获赞、作品数与近 30 天平均点赞、分享、评论</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PLAN -->
+  <section class="chapter gutter" id="plan">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">03</span>
+        <div><div class="ch-tag">CH.03<span>Planning</span></div><h2>商单大纲<br>与选题库</h2></div>
+        <p>商单先出大纲，把品牌卖点放进 IP 本来就在讲的场景里。选题从两处来：同赛道竞品的爆款，和全网跨赛道的高赞内容。</p>
+      </div>
+
+      <div class="sub first"><h3>商单大纲 · 魏牌 V9X <span class="mono">BRIEF</span></h3></div>
+      <div data-gallery class="rv">
+        <figure class="shot"><button type="button"><img src="assets/web/18.jpg" alt="魏牌V9X拍摄大纲思维导图" loading="lazy" width="1800" height="1136"></button>
+          <figcaption><span class="mono">MAP</span>开头、主体情节、品牌植入、结尾、拍摄准备与画面安排七个部分</figcaption></figure>
+      </div>
+      <div class="points rv">
+        <div class="point"><span class="mono">01</span><b>借 IP 原有系列</b><p>沿用「职场刷好感的微行为」合集形式，把场景放进搭乘同事、领导车辆，观众不觉得是广告。</p></div>
+        <div class="point"><span class="mono">02</span><b>卖点跟着情节走</b><p>空间感受 → 休息需求 → 互动演示 → 细节体验，四段情节各露一个卖点。</p></div>
+        <div class="point"><span class="mono">03</span><b>结尾回到人设</b><p>到达后道谢、提醒驾驶安全，落回「会说话、会照顾他人」。</p></div>
+      </div>
+
+      <div class="sub"><h3>选题库</h3>
+        <div class="tabs" role="tablist" aria-label="选题库">
+          <button type="button" role="tab" aria-selected="true" aria-controls="tp-a" id="tb-a">竞品选题库</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="tp-b" id="tb-b">全网爆款选题库</button>
+        </div></div>
+      <div data-gallery class="rv">
+        <figure class="shot panel" role="tabpanel" id="tp-a" aria-labelledby="tb-a"><button type="button"><img src="assets/web/19.jpg" alt="竞品选题库" loading="lazy" width="1800" height="1435"></button>
+          <figcaption><span class="mono">A</span>竞品选题库：按赛道细分（人情社交、职场成长、情感清醒、认知）记录标题、链接与赞评</figcaption></figure>
+        <figure class="shot panel" role="tabpanel" id="tp-b" aria-labelledby="tb-b" hidden><button type="button"><img src="assets/web/20.jpg" alt="全网爆款选题库" loading="lazy" width="1800" height="1533"></button>
+          <figcaption><span class="mono">B</span>全网爆款选题库：跨知识、心理、故事、科普等赛道，收集百万赞内容找可迁移的角度</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 SCRIPT -->
+  <section class="chapter gutter" id="script">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">04</span>
+        <div><div class="ch-tag">CH.04<span>Script</span></div><h2>文案分镜脚本</h2></div>
+        <p>每一镜写清场景、人物动作、景别、口播与字幕、妆造道具和时间点。拍摄现场照着走，剪辑照着对，原片抽帧作为参考画面。</p>
+      </div>
+      <div class="sub first"><h3>分镜表</h3>
+        <div class="tabs" role="tablist" aria-label="分镜脚本">
+          <button type="button" role="tab" aria-selected="true" aria-controls="tp-c" id="tb-c">如何戒掉弱者气息</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="tp-d" id="tb-d">职场刷好感的微行为</button>
+        </div></div>
+      <div data-gallery class="rv">
+        <div class="panel grid-side" role="tabpanel" id="tp-c" aria-labelledby="tb-c">
+          <figure class="shot"><button type="button"><img src="assets/web/21.jpg" alt="如何戒掉身上的弱者气息 分镜脚本" loading="lazy" width="1150" height="1600"></button>
+            <figcaption><span class="mono">SHOT LIST</span>按案例分段，逐镜标注时间点与秒数</figcaption></figure>
+          <div class="points col">
+            <div class="point"><span class="mono">案例 1</span><b>街边步道 · 拒绝非友善目光</b><p>中景低头看手机 → 近景转头直视镜头，用一个眼神完成「沉默注视是最好的回应」。</p></div>
+            <div class="point"><span class="mono">案例 2</span><b>餐厅木桌 · 不要无意识张嘴</b><p>同一场景先做错误示范再做正确示范，字幕标出「习惯性张嘴」和「合上嘴巴」。</p></div>
+            <div class="point"><span class="mono">案例 3</span><b>餐厅用餐 · 不过度客气</b><p>情景演绎，台词写到具体一句，备注「纯属虚构、餐厅出品很好」规避风险。</p></div>
+          </div>
+        </div>
+        <figure class="shot panel" role="tabpanel" id="tp-d" aria-labelledby="tb-d" hidden><button type="button"><img src="assets/web/22.jpg" alt="职场刷好感的微行为 分镜脚本" loading="lazy" width="1800" height="1210"></button>
+          <figcaption><span class="mono">SHOT LIST</span>口播原表转写与画面文字识别分开记录，按段落标注场景、角色与服装道具</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 SYSTEM -->
+  <section class="chapter gutter" id="system">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">05</span>
+        <div><div class="ch-tag">CH.05<span>System</span></div><h2>素材库<br>与变现链路</h2></div>
+        <p>单条爆款靠手感，稳定出爆款靠系统。素材分类入库，内容按固定链路生产，数据回来再决定沉淀还是重做。</p>
+      </div>
+
+      <div class="sub first"><h3>素材库 · Eagle <span class="mono">792 FILES</span></h3></div>
+      <div class="rec-grid rv">
+        <div class="player"><span class="vlabel">SCREEN REC · 00:40</span>
+          <video src="assets/video/eagle.mp4" poster="assets/video/eagle.jpg" controls muted playsinline preload="metadata"></video></div>
+        <div class="thumb" data-gallery>
+          <figure class="shot"><button type="button"><img src="assets/web/23.jpg" alt="Eagle素材库截图" loading="lazy" width="1800" height="1067"></button>
+            <figcaption><span class="mono">LIB</span>抖音封面、B-roll、BGM、音效、字体分类管理，按 IP 单独建库</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="sub"><h3>内容生产与变现链路 <span class="mono">WORKFLOW</span></h3></div>
+      <div class="flow rv">
+        <div class="node"><span class="mono">IN</span><b>IP 定位</b><p>用户心理研究 + 热点追踪</p></div>
+        <div class="node"><span class="mono">01</span><b>选题库筛选</b><p>竞品与全网爆款</p></div>
+        <div class="node"><span class="mono">02</span><b>大纲 · 分镜</b><p>开头、递进、收尾</p></div>
+        <div class="node"><span class="mono">03</span><b>拍摄 · 剪辑</b><p>字幕、节奏、封面</p></div>
+        <div class="node"><span class="mono">04</span><b>数据判断</b><p>播放、赞、评、藏</p></div>
+        <div class="node end"><span class="mono">OUT</span><b>沉淀与变现</b><p>爆款方法论 · 星图商单 · 公域转私域</p></div>
+      </div>
+      <p class="flow-loop">数据没达标：复盘开头与结构，回到选题换角度重做。</p>
+
+      <div class="sub"><h3>成果里程碑</h3><a class="link" href="https://claude.ai/artifact/E3QAWT1eA6WtH2zRuweobH" target="_blank" rel="noopener">查看完整版 ↗</a></div>
+      <div class="ms-scroll rv">
+        <div class="ms">
+          <div class="ms-item"><span class="when">2020.07</span><i class="dot"></i><b>网销运营起步</b><p>东风本田，维护汽车之家、易车、懂车帝</p></div>
+          <div class="ms-item"><span class="when">2022.08</span><i class="dot"></i><b>单月 8 台成交</b><p>两年线上平台零扣分</p></div>
+          <div class="ms-item"><span class="when">2022.10</span><i class="dot"></i><b>转型新媒体</b><p>沐辰健康，接手 60 万粉健康账号</p></div>
+          <div class="ms-item"><span class="when">2024.08</span><i class="dot"></i><b>涨粉至 83 万</b><p>543 条视频，总播放 3852 万</p></div>
+          <div class="ms-item"><span class="when">2024.12</span><i class="dot"></i><b>入职素肌</b><p>IP 编导，女性成长创始人 IP</p></div>
+          <div class="ms-item"><span class="when">2025.02</span><i class="dot"></i><b>达 1 万粉</b><p>选题库与脚本结构跑通</p></div>
+          <div class="ms-item hot"><span class="when">2026.04</span><i class="dot"></i><b>突破 100 万粉</b><p>14 个月，1 万 → 100 万</p></div>
+          <div class="ms-item hot"><span class="when">2026.09</span><i class="dot"></i><b>184 条 · 6.96 亿播放</b><p>获赞 1456.86 万</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 06 METHOD -->
+  <section class="chapter gutter" id="method">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">06</span>
+        <div><div class="ch-tag">CH.06<span>Method</span></div><h2>方法论沉淀</h2></div>
+        <p>把做过的项目拆成可以复用的东西：一棵从调研到产出的 IP 大脑，一组公开在 GitHub 上的 Skill，和日常积累的笔记。</p>
+      </div>
+
+      <div class="sub first"><h3>IP 大脑</h3>
+        <a class="link" href="https://claude.ai/artifact/A9ecW7QhdSD1uuP8hzBmfa" target="_blank" rel="noopener">打开在线版 ↗</a></div>
+      <div class="rec-grid rv">
+        <div class="player"><span class="vlabel">SCREEN REC · 01:12</span>
+          <video src="assets/video/ip-brain.mp4" poster="assets/video/ip-brain.jpg" controls muted playsinline preload="metadata"></video></div>
+        <div class="thumb" data-gallery>
+          <figure class="shot"><button type="button"><img src="assets/web/24.jpg" alt="IP大脑知识树" loading="lazy" width="772" height="1600"></button>
+            <figcaption><span class="mono">TREE</span>从调研到产出的十个环节，画成一棵知识树</figcaption></figure>
+        </div>
+      </div>
+      <div class="rv" style="margin-top:24px">
+        <div class="points" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-top:0" id="brainPoints">
+          <div class="point"><span class="mono">根系</span><b>进入项目</b><p>① 调研 ② 定方案。内部了解业务和 IP，外部看市场、竞品和爆款。</p></div>
+          <div class="point"><span class="mono">树干</span><b>搭 AI 员工</b><p>③ IP 大脑：灵魂文档、用户档案、工作流 SOP、工具箱，四份核心文档。</p></div>
+          <div class="point"><span class="mono">枝叶</span><b>日常执行</b><p>④ 热点监控 → ⑤ 选题 → ⑥ 文案脚本 → ⑦ 拍摄剪辑分发。</p></div>
+          <div class="point"><span class="mono">果实</span><b>沉淀复用</b><p>⑧ 素材库 ⑨ Skill 技能包 ⑩ 语料收集，结出可复用到任意 IP 的知识库。</p></div>
+        </div>
+      </div>
+
+      <div class="sub"><h3>GitHub · 开源 Skill <span class="mono">7 REPOS</span></h3><a class="link" href="https://github.com/Mona-ziranyun" target="_blank" rel="noopener">访问我的 GitHub ↗</a></div>
+      <div class="stack rv">
+        <div data-gallery>
+          <figure class="shot"><button type="button"><img src="assets/web/github.jpg" width="1800" height="876" alt="GitHub 主页 Mona-ziranyun" loading="lazy"></button>
+            <figcaption><span class="mono">GITHUB</span>把做内容时反复用到的流程写成 Skill 和模板，公开在 GitHub 上</figcaption></figure>
+        </div>
+        <div class="repos">
+          <a class="repo" href="https://github.com/Mona-ziranyun/personal-asset-box-skill" target="_blank" rel="noopener"><b>personal-asset-box-skill</b><p>本地优先的个人图片标签素材盒 Skill，附可运行的 Vite + IndexedDB 模板</p><span class="mono">JavaScript</span></a>
+          <a class="repo" href="https://github.com/Mona-ziranyun/musetag-skill" target="_blank" rel="noopener"><b>musetag-skill</b><p>AI 看图，从受控设计词库推荐标签，人只需确认或删除</p><span class="mono">JavaScript</span></a>
+          <a class="repo" href="https://github.com/Mona-ziranyun/douyin-card-cover-extractor" target="_blank" rel="noopener"><b>douyin-card-cover-extractor</b><p>提取抖音视频未点开前的主页作品卡片封面，并逐张质量检查的 Codex Skill</p></a>
+          <a class="repo" href="https://github.com/Mona-ziranyun/ziranyun-shot-library" target="_blank" rel="noopener"><b>ziranyun-shot-library</b><p>自然云聊健康 · 镜头与动效资产库</p><span class="mono">TypeScript</span></a>
+          <a class="repo" href="https://github.com/Mona-ziranyun/ai-method-library" target="_blank" rel="noopener"><b>ai-method-library</b><p>自然云 AI 方法库</p><span class="mono">HTML</span></a>
+          <a class="repo" href="https://github.com/Mona-ziranyun/vegetables-fruits" target="_blank" rel="noopener"><b>vegetables-fruits</b><p>《蔬菜水果》Remotion 短片镜头模版：扇形卡片展开</p><span class="mono">TypeScript</span></a>
+        </div>
+      </div>
+
+      <div class="sub"><h3>我的笔记 <span class="mono">18 NOTES</span></h3></div>
+      <div data-gallery class="rv">
+        <figure class="shot"><button type="button"><img src="assets/web/25.jpg" alt="我的笔记应用截图" loading="lazy" width="1800" height="917"></button>
+          <figcaption><span class="mono">NOTES</span>写作与叙事、抖音运营、短视频制作、人物研究等 9 个主题</figcaption></figure>
+      </div>
+      <div class="points rv">
+        <div class="point"><span class="mono">写作与叙事</span><b>老板 IP 如何找对标</b><p>老板不能抄别人的稿子，要借的是爆款的框架，再用访谈挖出老板自己的经历。</p></div>
+        <div class="point"><span class="mono">写作与叙事</span><b>早期创作者怎样建立影响力</b><p>黄金三秒之外，长期影响力靠什么积累。</p></div>
+        <div class="point"><span class="mono">短视频制作</span><b>用 AI 制作 MG 风格样片</b><p>提示词、评审与迭代方法。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 AI -->
+  <section class="chapter gutter" id="ai">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">07</span>
+        <div><div class="ch-tag">CH.07<span>AI</span></div><h2>关于 AI</h2></div>
+        <p>用 Claude Code 和 Codex 把重复的活交给工具：抓数据、拆爆款、写分镜、做封面。下面是我的知识库、技能库，以及顺手做的两个小工具。</p>
+      </div>
+
+      <div class="sub first"><h3>个人知识库与学习库 <span class="mono">KNOWLEDGE</span></h3></div>
+      <div class="rv" data-gallery>
+        <figure class="shot"><button type="button"><img src="assets/web/27.jpg" alt="运营网站导航库" loading="lazy" width="1800" height="1708"></button>
+          <figcaption><span class="mono">BASE</span>运营工具导航：数据分析、关键词、报告、素材网站分类收录</figcaption></figure>
+      </div>
+
+      <div class="sub"><h3>AI 视频制作 Skill <span class="mono">OBSIDIAN</span></h3></div>
+      <div class="rec-grid rv">
+        <div class="player"><span class="vlabel">SCREEN REC · 00:40</span>
+          <video src="assets/video/skills.mp4" poster="assets/video/skills.jpg" controls muted playsinline preload="metadata"></video></div>
+        <div class="thumb" data-gallery>
+          <figure class="shot"><button type="button"><img src="assets/web/28.jpg" alt="Obsidian技能关系图谱" loading="lazy" width="1800" height="1067"></button>
+            <figcaption><span class="mono">GRAPH</span>技能关系图谱：抖音数据采集、逐字稿提取、剪映草稿生成、直播切片、数字人等</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="sub"><h3>AI 小工具 <span class="mono">2 APPS</span></h3></div>
+      <div class="tools rv">
+        <article class="tool">
+          <header><h3>月有数</h3><a class="link" href="https://claude.ai/artifact/JR6gm216xJ8s5RCVrYJzk1" target="_blank" rel="noopener">打开 ↗</a></header>
+          <p>一张日历看清每天花了多少：余额、欠款待收回、本月预计开销，数据只存在自己浏览器里。</p>
+          <div data-gallery><figure class="shot"><button type="button"><img src="assets/web/29.jpg" alt="月有数界面" loading="lazy" width="1800" height="917"></button></figure></div>
+        </article>
+        <article class="tool">
+          <header><h3>栖页</h3><a class="link" href="https://claude.ai/artifact/GLt1T8Vq46FAVT2twiQzBD" target="_blank" rel="noopener">打开 ↗</a></header>
+          <p>个人文档库：像写文档一样记录，支持 Markdown，图片随手贴进来。</p>
+          <div data-gallery><figure class="shot"><button type="button"><img src="assets/web/30.jpg" alt="栖页界面" loading="lazy" width="1800" height="919"></button></figure></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 MY MEDIA -->
+  <section class="chapter gutter" id="media">
+    <div class="wrap">
+      <div class="ch-head rv">
+        <span class="ch-num" aria-hidden="true">08</span>
+        <div><div class="ch-tag">CH.08<span>My Media</span></div><h2>我的自媒体</h2></div>
+        <p>工作之外，我也在自己做账号：健康内容同步到抖音、小红书和公众号，另有一个 AI 科普账号。从选题、封面到发布都是自己完成。</p>
+      </div>
+      <div class="sub first"><h3>账号主页 <span class="mono">4 ACCOUNTS</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelC" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelC" data-step="1" aria-label="向右">›</button></div></div>
+      <div class="reel rv" id="reelC" data-dir="1"><div class="reel-track land" data-gallery>
+        <figure class="shot"><button type="button"><img src="assets/web/media-1.jpg" alt="抖音账号 自然云聊健康 主页" loading="lazy" width="1800" height="996"></button>
+          <figcaption><span class="pf-meta"><b>抖音 · 自然云聊健康</b><span>27 条作品 · 健康科普</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/media-3.jpg" alt="小红书账号 自然云说 主页" loading="lazy" width="1800" height="904"></button>
+          <figcaption><span class="pf-meta"><b>小红书 · 自然云说</b><span>健康图文笔记</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/media-4.jpg" alt="公众号 自然云说 后台" loading="lazy" width="1800" height="926"></button>
+          <figcaption><span class="pf-meta"><b>公众号 · 自然云说</b><span>33 篇原创</span></span></figcaption></figure>
+        <figure class="shot"><button type="button"><img src="assets/web/media-2.jpg" alt="抖音账号 Joey说AI 主页" loading="lazy" width="1800" height="996"></button>
+          <figcaption><span class="pf-meta"><b>抖音 · Joey说AI</b><span>6 条作品 · AI 科普</span></span></figcaption></figure>
+      </div></div>
+    </div>
+  </section>
+
+  <footer class="foot gutter">
+    <div class="wrap">
+      <div class="foot-grid">
+        <h2>把每一条内容<br><span>做到值得看完。</span></h2>
+        <div class="contact">
+          <div class="row"><span class="k">EMAIL</span><span class="val" id="email">fsy2691948041@163.com</span><button class="copy" type="button" data-copy="email">复制</button></div>
+          <div class="row"><span class="k">ROLE</span><span>IP 编导 · IP 内容运营</span></div>
+        </div>
+      </div>
+      <div class="fine"><span>方世云 · IP 编导作品集</span><span>END OF REEL</span></div>
+    </div>
+  </footer>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="图片预览">
+  <button type="button" class="x" id="lbClose" aria-label="关闭">×</button>
+  <button type="button" class="arrow prev" id="lbPrev" aria-label="上一张">‹</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+  <button type="button" class="arrow next" id="lbNext" aria-label="下一张">›</button>
+</div>
+<div class="cv" id="cv" hidden role="dialog" aria-modal="true" aria-label="方世云简历">
+  <div class="cv-bar"><span class="mono">RESUME · 方世云</span><button type="button" class="x" id="cvClose" aria-label="关闭">×</button></div>
+  <div class="cv-scroll" id="cvScroll"><img src="assets/web/resume-1.jpg" alt="方世云简历" width="1487" height="2104" loading="lazy"></div>
+</div>
+<div class="lb" id="vp" hidden role="dialog" aria-modal="true" aria-label="录屏播放">
+  <button type="button" class="x" id="vpClose" aria-label="关闭">×</button>
+  <video id="vpVideo" controls playsinline></video>
+  <p id="vpCap"></p>
+</div>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* hero waveform with playhead */
+  var cv=document.getElementById('wave'), ctx=cv.getContext('2d'), W=0,H=0,dpr=1,bars=[],t0=performance.now();
+  function seed(n){var a=[],v=.5;for(var i=0;i<n;i++){v+= (Math.random()-.5)*.35; v=Math.max(.12,Math.min(1,v)); a.push(v*(.55+.45*Math.sin(i/9)));}return a;}
+  function size(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);bars=seed(Math.ceil(W/6)+2);}
+  function col(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function draw(now){
+    var t=(now-t0)/1000, mid=H*.42, amp=H*.26, cw=col('--wave'), ca=col('--amber');
+    ctx.clearRect(0,0,W,H);
+    var ph=((t*0.06)%1)*W, rs=ph-W*.14;
+    for(var i=0;i<bars.length;i++){
+      var x=i*6, h=bars[i]*amp*(.85+.15*Math.sin(t*1.6+i*.3));
+      var on=x>rs&&x<ph;
+      ctx.fillStyle=on?ca:cw; ctx.globalAlpha=on?.95:.9;
+      ctx.fillRect(x,mid-h,3,h*2);
+    }
+    ctx.globalAlpha=1;
+    // selection frame + playhead
+    ctx.strokeStyle=ca; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(rs,mid-amp-24); ctx.lineTo(rs,mid+amp+24); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ph,mid-amp-40); ctx.lineTo(ph,mid+amp+40); ctx.stroke();
+    ctx.fillStyle=ca; ctx.fillRect(ph-5,mid-amp-46,10,8);
+    var s=Math.floor(t)%60, f=Math.floor((t%1)*25), m=Math.floor(t/60)%60;
+    var tc='00:'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+':'+String(f).padStart(2,'0');
+    ctx.font='11px "JetBrains Mono",monospace'; ctx.fillText(tc,Math.min(ph+10,W-90),mid-amp-36);
+    document.getElementById('tc').textContent='TC '+tc;
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); window.addEventListener('resize',function(){size(); if(reduce) draw(performance.now()+4000);});
+  if(reduce) draw(t0+4000); else requestAnimationFrame(draw);
+
+  /* keyword marquee */
+  var kw=['选题策划','受众画像','竞品拆解','商单大纲','文案分镜','拍摄协作','剪辑包装','数据复盘','IP 大脑','AI 工作流'];
+  var mq=document.getElementById('mq'), s='';
+  for(var r=0;r<2;r++) kw.forEach(function(k){s+='<span>'+k+'</span>';});
+  mq.innerHTML=s;
+
+  /* nav highlight */
+  var links=[].slice.call(document.querySelectorAll('#navlist a[href^="#"]:not([data-resume])'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var y=window.scrollY+160, cur=0;
+    secs.forEach(function(sec,i){ if(sec && sec.getBoundingClientRect().top+window.scrollY<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on',i===cur); });
+    var on=links[cur]; if(on && on.scrollIntoView && window.innerWidth<700){ var ul=on.parentNode.parentNode; ul.scrollLeft=on.offsetLeft-ul.clientWidth/2+on.clientWidth/2; }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* reveal: only items below the fold get the lift */
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){e.target.classList.remove('pre'); io.unobserve(e.target);} });},{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ if(el.getBoundingClientRect().top>window.innerHeight){ el.classList.add('pre'); io.observe(el);} });
+  }
+
+  /* reels: ping-pong auto scroll, pause on hover/touch, drag to scrub */
+  document.querySelectorAll('.reel').forEach(function(el){
+    var dir=+el.dataset.dir||1, paused=false, resumeT=null, pos=0, last=0;
+    function max(){return el.scrollWidth-el.clientWidth;}
+    if(dir<0){ requestAnimationFrame(function(){ el.scrollLeft=max(); pos=el.scrollLeft; }); }
+    function hold(ms){ paused=true; clearTimeout(resumeT); resumeT=setTimeout(function(){ paused=false; pos=el.scrollLeft; }, ms||1800); }
+    el.addEventListener('mouseenter',function(){paused=true;clearTimeout(resumeT);});
+    el.addEventListener('mouseleave',function(){hold(600);});
+    el.addEventListener('touchstart',function(){hold(3000);},{passive:true});
+    el.addEventListener('wheel',function(){hold(2000);},{passive:true});
+    el.addEventListener('focusin',function(){paused=true;clearTimeout(resumeT);});
+    el.addEventListener('focusout',function(){hold(1200);});
+    // mouse drag
+    var down=false,sx=0,sl=0,moved=false;
+    el.addEventListener('mousedown',function(e){down=true;moved=false;sx=e.pageX;sl=el.scrollLeft;});
+    window.addEventListener('mousemove',function(e){ if(!down) return; var dx=e.pageX-sx; if(Math.abs(dx)>4){moved=true;el.classList.add('drag');} el.scrollLeft=sl-dx; });
+    window.addEventListener('mouseup',function(){ if(!down) return; down=false; setTimeout(function(){el.classList.remove('drag');},0); pos=el.scrollLeft; });
+    el.addEventListener('click',function(e){ if(moved){ e.stopPropagation(); e.preventDefault(); moved=false; } },true);
+    el._step=function(n){ hold(2500); var card=el.querySelector('.shot'); var w=card?card.getBoundingClientRect().width+20:240; el.scrollBy({left:n*w*2,behavior:reduce?'auto':'smooth'}); dir=n; };
+    if(reduce) return;
+    function tick(now){
+      var dt=last?Math.min(48,now-last):16; last=now;
+      var m=max();
+      if(!paused && !down && m>2){
+        pos+=dir*dt*0.045;
+        if(pos>=m){pos=m;dir=-1;} else if(pos<=0){pos=0;dir=1;}
+        el.scrollLeft=pos;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  document.querySelectorAll('.rc').forEach(function(b){
+    b.addEventListener('click',function(){ var r=document.getElementById(b.dataset.reel); if(r&&r._step) r._step(+b.dataset.step); });
+  });
+
+  /* tabs */
+  document.querySelectorAll('[role=tablist]').forEach(function(tl){
+    var tabs=[].slice.call(tl.querySelectorAll('[role=tab]'));
+    tabs.forEach(function(tb){ tb.addEventListener('click',function(){
+      tabs.forEach(function(o){ var on=o===tb; o.setAttribute('aria-selected',on); document.getElementById(o.getAttribute('aria-controls')).hidden=!on; });
+    });});
+  });
+
+  /* lightbox (skips hidden tab panels) */
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+  var list=[], idx=0, lastFocus=null;
+  function show(i){
+    idx=(i+list.length)%list.length; var im=list[idx];
+    lbImg.src=im.src; lbImg.alt=im.alt;
+    var cap=im.closest('figure').querySelector('figcaption');
+    lbCap.textContent=cap?cap.textContent.trim():im.alt;
+    var one=list.length<2; document.getElementById('lbPrev').hidden=one; document.getElementById('lbNext').hidden=one;
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-gallery] .shot button'); if(!b) return;
+    var g=b.closest('[data-gallery]');
+    list=[].slice.call(g.querySelectorAll('.shot button img')).filter(function(im){return !im.closest('[hidden]');});
+    lastFocus=b; show(list.indexOf(b.querySelector('img'))); lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lbClose').focus();
+  });
+  function close(){ lb.hidden=true; document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  document.getElementById('lbClose').onclick=close;
+  document.getElementById('lbPrev').onclick=function(){show(idx-1)};
+  document.getElementById('lbNext').onclick=function(){show(idx+1)};
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+
+  /* screen-recording player */
+  var vp=document.getElementById('vp'), vv=document.getElementById('vpVideo'), vBtn=null;
+  document.querySelectorAll('.play').forEach(function(b){
+    b.addEventListener('click',function(){
+      vBtn=b; vv.src=b.dataset.video; document.getElementById('vpCap').textContent=b.dataset.title;
+      vp.hidden=false; document.body.style.overflow='hidden'; document.getElementById('vpClose').focus();
+      var p=vv.play(); if(p&&p.catch) p.catch(function(){});
+    });
+  });
+  function vClose(){ vv.pause(); vv.removeAttribute('src'); vv.load(); vp.hidden=true; document.body.style.overflow=''; if(vBtn) vBtn.focus(); }
+  document.getElementById('vpClose').onclick=vClose;
+  vp.addEventListener('click',function(e){ if(e.target===vp) vClose(); });
+
+  document.addEventListener('keydown',function(e){
+    if(!vp.hidden && e.key==='Escape') vClose();
+    if(lb.hidden) return;
+    if(e.key==='Escape') close(); if(e.key==='ArrowLeft') show(idx-1); if(e.key==='ArrowRight') show(idx+1);
+  });
+
+  /* resume viewer */
+  var cv=document.getElementById('cv'), cvFrom=null;
+  document.querySelectorAll('[data-resume]').forEach(function(a){
+    a.addEventListener('click',function(e){ e.preventDefault(); cvFrom=a; cv.hidden=false; document.getElementById('cvScroll').scrollTop=0; document.body.style.overflow='hidden'; document.getElementById('cvClose').focus(); });
+  });
+  function cvClose(){ cv.hidden=true; document.body.style.overflow=''; if(cvFrom) cvFrom.focus(); }
+  document.getElementById('cvClose').onclick=cvClose;
+  cv.addEventListener('click',function(e){ if(e.target===cv||e.target.id==='cvScroll') cvClose(); });
+  document.addEventListener('keydown',function(e){ if(!cv.hidden && e.key==='Escape') cvClose(); });
+
+  /* copy */
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.dataset.copy), t=el.textContent;
+      function sel(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='已选中'; }
+      try{ navigator.clipboard.writeText(t).then(function(){btn.textContent='已复制'},sel); }catch(err){ sel(); }
+      setTimeout(function(){btn.textContent='复制'},1800);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
