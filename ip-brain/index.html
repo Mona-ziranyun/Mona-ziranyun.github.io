@@ -1,0 +1,684 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>IP 大脑生长图</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.cn">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.cn/css2?family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a living tree drawn bottom-up. Roots = 进入项目, soil = 支撑体系, trunk = IP 大脑, branches = 日常执行, fruit = 知识库. Layer ruler on the left; details slide in from the right. */
+:root{
+  --bg:#EEF3EC; --paper:#F8FBF6; --ink:#1C2A21; --muted:#5D6E62; --line:#C9D6C9;
+  --bark:#6B5440; --root:#8A6E55; --canopy:#BFD9B6; --canopy2:#A9CDA0; --soil:#E3D8C7; --sky:#E4EEF4;
+  --accent:#2F7A4F;
+  --sky-f:#FFF3D6; --sky-s:#D9A23B;
+  --root-f:#ECE9FB; --root-s:#7C6FD1;
+  --brain-f:#DDF3E6; --brain-s:#2F9461;
+  --daily-f:#FDE9DD; --daily-s:#D9784A;
+  --rose-f:#FBE3EC; --rose-s:#C9557F;
+  --lib-f:#DCF2EC; --lib-s:#2E8F7A;
+  --skill-f:#FDF0D8; --skill-s:#C98A1E;
+  --fruit-f:#F1EFEA; --fruit-s:#8C8476;
+  --gold:#E9B949;
+  --f-display:"ZCOOL XiaoWei","Songti SC","STSong",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1611; --paper:#152019; --ink:#E4EDE5; --muted:#97A99C; --line:#2A3A2F;
+  --bark:#8E735A; --root:#A08468; --canopy:#1F3526; --canopy2:#264230; --soil:#241E17; --sky:#121D24;
+  --accent:#6CC28E;
+  --sky-f:#3A2F17; --sky-s:#E8B655;
+  --root-f:#25223D; --root-s:#A79CF0;
+  --brain-f:#16362A; --brain-s:#5CC78F;
+  --daily-f:#3A2519; --daily-s:#EE9468;
+  --rose-f:#3A1D29; --rose-s:#E57BA2;
+  --lib-f:#143430; --lib-s:#55C2A9;
+  --skill-f:#382B12; --skill-s:#E2A845;
+  --fruit-f:#26241F; --fruit-s:#B3AA99;
+  --gold:#F0C35A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1611; --paper:#152019; --ink:#E4EDE5; --muted:#97A99C; --line:#2A3A2F;
+  --bark:#8E735A; --root:#A08468; --canopy:#1F3526; --canopy2:#264230; --soil:#241E17; --sky:#121D24;
+  --accent:#6CC28E;
+  --sky-f:#3A2F17; --sky-s:#E8B655;
+  --root-f:#25223D; --root-s:#A79CF0;
+  --brain-f:#16362A; --brain-s:#5CC78F;
+  --daily-f:#3A2519; --daily-s:#EE9468;
+  --rose-f:#3A1D29; --rose-s:#E57BA2;
+  --lib-f:#143430; --lib-s:#55C2A9;
+  --skill-f:#382B12; --skill-s:#E2A845;
+  --fruit-f:#26241F; --fruit-s:#B3AA99;
+  --gold:#F0C35A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1440px;margin:0 auto}
+header{padding-block:36px 18px;display:grid;gap:10px}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,6vw,58px);line-height:1.1;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:62ch;color:var(--muted);margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip.primary{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.stage{position:relative;max-width:1120px;margin-inline:auto;overflow-x:auto;border-radius:20px;background:var(--paper);border:1px solid var(--line);-webkit-overflow-scrolling:touch}
+.stage svg{display:block;width:100%;min-width:760px;height:auto}
+.hint{font-size:13px;color:var(--muted);margin:10px 4px 0}
+
+/* svg */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+.band-label{font-family:var(--f-display);font-size:22px}
+.band-sub{font-size:12px;fill:var(--muted)}
+.band{cursor:pointer}
+.band:hover .band-label{fill:var(--accent)}
+.node{cursor:pointer;transition:opacity .35s}
+.node .box{transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.node:hover .box,.node:focus-visible .box{transform:scale(1.04)}
+.node:focus{outline:none}
+.node:focus-visible .shape{stroke-width:3}
+.node .t{font-weight:700;font-size:16px}
+.node .s{font-size:11.5px;fill:var(--muted)}
+.leaf .t{font-weight:500;font-size:13px}
+.leaf .s{font-size:10.5px}
+.node.active .shape{stroke-width:3.2;filter:drop-shadow(0 0 10px var(--glow))}
+.node.flash .shape{animation:flash 1.2s ease 2}
+@keyframes flash{50%{stroke-width:4}}
+svg[data-focus] .node:not(.in-focus){opacity:.18}
+svg[data-focus] .twig:not(.in-focus){opacity:.15}
+.twig{transition:opacity .35s}
+.flow{fill:none;stroke-linecap:round;stroke-dasharray:2 16;animation:sap 2.4s linear infinite}
+@keyframes sap{to{stroke-dashoffset:-36}}
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.07)}}
+
+/* talk card (云云的对话框) */
+.stage-wrap{position:relative;max-width:1120px;margin:0 auto}
+.talk{position:absolute;z-index:15;width:400px;max-width:calc(100% - 16px);max-height:min(480px,72vh);background:var(--paper);border:1.5px solid var(--glow,var(--accent));border-radius:18px;
+  box-shadow:0 14px 40px rgba(20,40,28,.18);display:flex;flex-direction:column;opacity:0;transform:translateY(8px) scale(.97);pointer-events:none;transition:opacity .25s,transform .25s}
+.talk.on{opacity:1;transform:none;pointer-events:auto}
+.talk::before{content:"";position:absolute;top:var(--tail,40px);width:14px;height:14px;background:var(--paper);border:1.5px solid var(--glow,var(--accent));transform:rotate(45deg)}
+.talk.tail-l::before{left:-8.5px;border-top:0;border-right:0}
+.talk.tail-r::before{right:-8.5px;border-bottom:0;border-left:0}
+.t-head{padding:14px 18px 10px;display:grid;gap:3px;position:relative;border-bottom:1px solid var(--line)}
+.t-head .who{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.t-head .who b{color:var(--glow,var(--accent));font-weight:500}
+.t-head h2{font-family:var(--f-display);font-weight:400;font-size:25px;line-height:1.2;margin:0;padding-right:34px;text-wrap:balance}
+.t-head p{margin:0;color:var(--muted);font-size:13.5px}
+.close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer;line-height:1}
+.t-body{overflow-y:auto;padding:14px 18px;display:grid;gap:16px;align-content:start;flex:1;font-size:14px;line-height:1.65}
+.t-body h3{font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:500;margin:0 0 6px}
+.t-body ul,.t-body ol{margin:0;padding-left:1.2em;display:grid;gap:5px}
+.t-body p{margin:0}
+.kids{display:grid;gap:8px}
+.kid{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);display:grid;gap:2px;min-width:0}
+.kid b{font-size:14px}
+.kid small{color:var(--muted);font-size:12px}
+.kid span{font-size:13px;line-height:1.6}
+.kid.flash{animation:kflash 1.4s ease}
+@keyframes kflash{30%{border-color:var(--glow);box-shadow:0 0 0 3px var(--glow)}}
+.flowline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.flowline span{border:1px solid var(--line);border-radius:8px;padding:2px 8px;background:var(--bg)}
+.flowline i{font-style:normal;color:var(--muted)}
+.tip{border-radius:10px;padding:10px 12px;background:var(--bg);border:1px dashed var(--line);font-size:13.5px}
+.tip b{color:var(--accent)}
+.warn b{color:var(--rose-s)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td,th{border-bottom:1px solid var(--line);padding:6px 5px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px}
+.big{font-family:var(--f-mono);font-size:26px;line-height:1;color:var(--accent)}
+.stat{display:flex;gap:18px;flex-wrap:wrap}
+.stat div{display:grid;gap:4px}
+.stat small{color:var(--muted);font-size:12px}
+.t-foot{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:10px 14px 12px;border-top:1px solid var(--line)}
+.t-foot button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:9px;padding:6px 11px;cursor:pointer;white-space:nowrap}
+.t-foot button:disabled{opacity:.35;cursor:default}
+.t-foot .mid{display:grid;gap:4px;justify-items:center;min-width:0}
+.t-foot .play{border-color:var(--accent);color:var(--accent)}
+.bar{width:100%;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow,var(--accent))}
+.count{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+.below{margin-top:28px;max-width:1120px;margin-inline:auto}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;min-width:0}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0 0 4px}
+.card .sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px;font-size:14px}
+.legend div{display:grid;gap:2px}
+.legend b{font-family:var(--f-display);font-weight:400;font-size:18px}
+@media (max-width:760px){
+  .talk{position:fixed;left:0 !important;right:0;top:auto !important;bottom:0;width:100%;max-width:none;max-height:62vh;border-radius:18px 18px 0 0;border-width:1.5px 0 0;
+    padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .talk::before{display:none}
+}
+/* sprite */
+.sprite{cursor:pointer}
+.sprite:focus{outline:none}
+.sprite .bob{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.sprite .wing{transform-box:fill-box;animation:flap .2s ease-in-out infinite alternate}
+.sprite .wing.l{transform-origin:100% 70%}
+.sprite .wing.r{transform-origin:0% 70%}
+@keyframes flap{to{transform:scaleX(.4)}}
+.spark{transform-box:fill-box;transform-origin:center;animation:spark .9s ease-out forwards}
+@keyframes spark{to{opacity:0;transform:translateY(12px) scale(.2)}}
+.bubble rect{fill:var(--paper);stroke:var(--accent);stroke-width:1.5}
+.bubble text{font-size:14px;font-weight:500}
+.bubble{transition:opacity .25s}
+@media (prefers-reduced-motion:reduce){.sprite .bob,.sprite .wing,.spark{animation:none}}
+@media (prefers-reduced-motion:reduce){.flow,.sway,.pulse,.node.flash .shape,.kid.flash{animation:none}aside,.scrim{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Harness 驾驭工程 · IP 助理 AI 系统</div>
+    <h1>一棵会长出<em>爆款</em>的 IP 大脑树</h1>
+    <p class="lede">先有业务闭环，再有 AI 提效。根扎进调研和方案，树干是 IP 大脑，枝叶每天开出热点、选题、文案和成片，最后结出可复用的知识库。点任意方块，小精灵云云会飞过去，告诉你这一步怎么做、用什么工具。</p>
+    <div class="toolbar" id="layers" role="group" aria-label="按层查看">
+      <button class="chip primary" id="tour" type="button">✨ 跟着精灵云云走一遍流程</button>
+      <button class="chip" data-layer="" aria-pressed="true" type="button">全部层</button>
+    </div>
+  </header>
+
+  <div class="stage-wrap" id="wrap">
+  <div class="stage" id="stage">
+    <svg id="tree" viewBox="-150 0 1150 1545" role="img" aria-label="IP 大脑生长树：根系、树干、枝叶、树冠、果实五层">
+      <defs>
+        <radialGradient id="gFruit" cx="35%" cy="30%" r="75%">
+          <stop offset="0" style="stop-color:var(--paper)"/><stop offset=".35" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:var(--skill-s)"/>
+        </radialGradient>
+        <radialGradient id="gGlow"><stop offset="0" style="stop-color:var(--gold);stop-opacity:.75"/><stop offset="1" style="stop-color:var(--gold);stop-opacity:0"/></radialGradient>
+        <linearGradient id="gTrunk" x1="0" x2="1">
+          <stop offset="0" style="stop-color:var(--bark)"/><stop offset=".5" style="stop-color:var(--root)"/><stop offset="1" style="stop-color:var(--bark)"/>
+        </linearGradient>
+      </defs>
+      <g id="bands"></g>
+      <g id="canopy"></g>
+      <g id="wood"></g>
+      <g id="twigs"></g>
+      <g id="flows"></g>
+      <g id="nodes"></g>
+    </svg>
+  </div>
+  <div class="talk" id="talk" role="dialog" aria-labelledby="tTitle" aria-hidden="true">
+    <div class="t-head">
+      <span class="who" id="tWho"></span>
+      <h2 id="tTitle"></h2>
+      <p id="tSub"></p>
+      <button class="close" id="tClose" type="button" aria-label="关闭对话框">×</button>
+    </div>
+    <div class="t-body" id="tBody"></div>
+    <div class="t-foot">
+      <button id="tPrev" type="button" aria-label="上一站">← 上一站</button>
+      <div class="mid"><button class="play" id="tPlay" type="button">▶ 自动</button><div class="bar"><i id="tBar"></i></div><span class="count" id="tCount"></span></div>
+      <button id="tNext" type="button" aria-label="下一站">下一站 →</button>
+    </div>
+  </div>
+  </div>
+  <p class="hint" style="max-width:1120px;margin-inline:auto">提示：点任意方块，云云会飞过去给你讲；鼠标停在对话框上，自动播放会暂停。点左侧层名可以只看这一层，手机上可以左右滑动树。键盘：← → 上一站 / 下一站，Esc 关闭。</p>
+
+  <section class="below">
+    <div class="card">
+      <h2>怎么读这棵树</h2>
+      <p class="sub">从下往上，就是从进入项目到最终产出</p>
+      <div class="legend">
+        <div><b>根系</b><span>阶段一 · 进入项目：① 调研、② 定方案。根扎得准，后面才不跑偏。</span></div>
+        <div><b>树干</b><span>阶段二 · 搭建 AI 员工：③ IP 大脑，四份核心 MD 文档是它的年轮。</span></div>
+        <div><b>枝叶</b><span>阶段三 · 日常执行：④ 热点 → ⑤ 选题 → ⑥ 文案 → ⑦ 拍剪发，树液沿枝条一路往上流。</span></div>
+        <div><b>树冠</b><span>支撑体系：⑧ 素材库、⑨ Skill 技能包，把每天跑出来的爆款和方法论沉淀下来。</span></div>
+        <div><b>果实</b><span>最终产出：⑩ 语料收集，结出可复用到任意 IP 的知识库。</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<script>
+const LAYERS = [
+  {key:'sky',   name:'气候', sub:'开篇 · 时代趋势', y0:0,    y1:130,  fill:'--sky'},
+  {key:'fruit', name:'果实', sub:'最终产出 · 知识库', y0:130,  y1:420,  fill:null},
+  {key:'soil',  name:'树冠', sub:'支撑体系 · 素材 & Skill', y0:420, y1:640, fill:null},
+  {key:'branch',name:'枝叶', sub:'阶段三 · 日常执行', y0:640,  y1:1160, fill:null},
+  {key:'trunk', name:'树干', sub:'阶段二 · 搭建AI员工', y0:1160, y1:1312, fill:null},
+  {key:'root',  name:'根系', sub:'阶段一 · 进入项目', y0:1312, y1:1545, fill:'--soil'},
+];
+const STAGE = {sky:'开篇 · AI 时代',fruit:'最终产出 · IP 知识库',branch:'阶段三 · 日常执行',trunk:'阶段二 · 搭建 AI 员工',soil:'支撑体系 · 素材库 & Skill 库',root:'阶段一 · 进入项目'};
+
+const N = [
+ {id:'s1',layer:'sky',c:'sky',x:170,y:65,w:290,h:62,t:'AI 时代趋势',s:'降本增效 / 赛博裁员 / 用量写进 KPI',
+  sum:'为什么现在要学 IP 助理 AI 系统',
+  body:`<div><h3>正在发生什么</h3><ul>
+   <li><b>赛博裁员：</b>大厂裁员往往由一个“用 AI 以 1/10 成本跑通项目”的事件推动，老板顿悟后加速替代。国外裁得明显，国内过渡较慢。</li>
+   <li><b>用量写进 KPI：</b>不少公司给员工配 Token 额度，要求用最少的 Token 完成最多工作，剩余还能折现。</li>
+   <li><b>岗位需求变化：</b>IP 运营 JD 已普遍要求 AI 抓热点、AI 脚本、AI 文案 / 配音 / 字幕 / 剪辑 / 数据分析，以及 Seedance 2.0、可灵等工具。</li></ul></div>
+   <div class="tip"><b>求职建议：</b>面试时可以问一句“AI / Token 能否报销”。AI 能力 + 流量影响力，是这个时代最值得投入的两件事。</div>`},
+ {id:'s2',layer:'sky',c:'sky',x:830,y:65,w:290,h:62,t:'用最好的模型',s:'遇强则强 / 60 分模型只能产出 70 分',
+  sum:'选人比培训更重要',
+  body:`<div><h3>原则</h3><ul>
+   <li>用 60 分的模型只能产出六七十分。优先用最强模型（如 Claude Opus）沉淀方法论，再交给较弱模型执行。</li>
+   <li><b>不要聊天框，要 AI 系统：</b>不是零散的 AI 工具，而是把整条工作流串起来的“AI 员工”。</li></ul></div>
+   <div class="stat"><div><span class="big">60→70</span><small>弱模型的天花板</small></div><div><span class="big">1/10</span><small>AI 跑通项目的成本</small></div></div>`},
+
+ {id:'n10',layer:'fruit',c:'fruit',x:500,y:320,t:'⑩ IP 语料收集',s:'视频 / 直播 / 公众号 / 星球 / 1v1',
+  sum:'IP 活跃在哪里，就收集哪里',
+  kids:[
+   {t:'直播回放',s:'转逐字稿 / 区分发言人',x:290,y:265,d:'用阿里百炼平台的 API 转逐字稿。转写时必须区分发言人（连麦场景），否则 AI 会把别人的话当成 IP 说的。'},
+   {t:'星球 / 圈子',s:'问答 / 评价 / 互动',x:710,y:265,d:'问答、评价、互动里藏着 IP 最真实的表达和用户最真实的问题。'},
+   {t:'访谈 / 开会',s:'留痕 / 结构化整理',x:300,y:375,d:'1v1 访谈、开会留痕，整理成结构化文档。'},
+   {t:'朋友圈 / 公众号',s:'文章 / 动态采集',x:700,y:375,d:'朋友圈、公众号、即刻等，IP 活跃在哪里就收集哪里。'}],
+  body:`<div class="tip"><b>收集策略：</b>IP 越大越适合大范围收集；IP 较小时，就从开会、谈话、讲课和朋友圈入手。</div>
+   <div class="tip">这些语料会回流到 ③ IP 大脑，让 AI 越来越像这个 IP 本人。</div>`},
+ {id:'n11',layer:'fruit',c:'fruit',x:500,y:180,fruit:true,t:'知识库',s:'最终产出',
+  sum:'语气风格 + 人群画像 + IP 大脑 → 可复用于任意 IP',
+  body:`<div><h3>结出的果实</h3><div class="flowline"><span>语气风格</span><i>+</i><span>人群画像</span><i>+</i><span>IP 大脑</span><i>→</i><span>可复用于任意 IP</span></div></div>
+   <div><h3>一句话总结</h3><p>把 IP 助理原本手工做的整套流程，交给一个“AI 员工”按 SOP 执行：从一条热点到一条数字人成片不超过 10 分钟，一天更新三条。</p></div>
+   <div class="stat"><div><span class="big">≤10′</span><small>热点到成片</small></div><div><span class="big">3 条</span><small>每天更新</small></div><div><span class="big">170+</span><small>每日热点入库</small></div></div>`},
+
+ {id:'n7',layer:'branch',c:'rose',x:700,y:720,t:'⑦ 拍摄 → 剪辑 → 分发',s:'全流程 ≤10 分钟 · 本期重点',ya:880,
+  sum:'热点 → 成片全程 AI 驱动，一天更新三条',
+  kids:[
+   {t:'数字人成片',s:'A-roll + B-roll',x:890,y:665,d:'<b>A-roll</b>（主讲画面）：飞影数字人输入逐字稿一键出镜；用 Fish Audio 或火山引擎豆包声音复刻 2.0 克隆 IP 本人的声音，整条视频统一用克隆音，录音环境尽量和场景一致。<br><b>B-roll</b>（辅助镜头）：复刻别人好看的镜头形式（景别、运镜、构图），换成自己的内容，沉淀成镜头库并放到个人网站当作品集。'},
+   {t:'AI 剪辑',s:'剪映模板 / 一键字幕',x:890,y:745,d:'把「剪映源文件AI.zip」发给 Claude Code / Codex 说“帮我安装这个剪映连接包”，AI 就能打开和改剪映草稿。常用效果设成预设模板，一键剪气口、简单包装，剪映内一键字幕。简单视频直接 AI 剪，复杂特效仍在剪映精剪。'},
+   {t:'矩阵分发',s:'API / 多平台自动发',x:840,y:830,d:'自己接平台 API，把密钥交给 AI 直接分发；或在 Chrome 装「爱贝壳内容同步助手」，同时发动态、视频、文章和播客。做海外市场时，遇到验证码或扫码，AI 会请你协助。'},
+   {t:'数据复盘',s:'AI 报告 → 反馈迭代',x:640,y:835,d:'导出数据 → 看播放、收藏、评论、分享、2 秒 / 5 秒完播率 → 本期与往期对比 → AI 出结论 → 拆单条爆款 → 沉淀成方法论，反馈给下一轮选题和文案。'}],
+  body:`<div class="tip"><b>课上演示：</b>只给“小龙虾”一句指令（例如“第一条：Meta 强制用 AI”），不到 10 分钟就产出数字人视频。系统调好后可以定时每天按热点产出三条，自动发到三个账号，人工只做审核。</div>
+   <div><h3>工具一览</h3><div class="tbl"><table><tr><th>环节</th><th>工具</th></tr>
+   <tr><td>A-roll</td><td>飞影数字人 + Fish Audio / 豆包声音复刻 2.0</td></tr>
+   <tr><td>B-roll</td><td>AI 视频生成 + 个人网站镜头库</td></tr>
+   <tr><td>AI 剪辑</td><td>Claude Code / Codex + 剪映连接插件 + 直播切片 Skill</td></tr>
+   <tr><td>矩阵分发</td><td>平台 API / 爱贝壳内容同步助手</td></tr>
+   <tr><td>数据复盘</td><td>抖音指数 / 创作者中心小助手 / AI</td></tr></table></div></div>
+   <div><h3>直播切片 Skill · 四步出片</h3><ol>
+   <li><b>挑切片：</b>读整场直播逐字稿，挑出 4～6 个能单独成立的观点。</li>
+   <li><b>想开头：</b>每条给 2～3 版开头，同时出标题、封面字、正文和标签。</li>
+   <li><b>精剪：</b>剪掉气口、口误和重复，字幕按语义断行并校对。</li>
+   <li><b>包装：</b>重点字、跳切轻推、对焦虚化、目录卡、B-roll 和音效。</li></ol></div>
+   <div class="tip warn"><b>注意：</b>AI 写草稿前一定要完全退出剪映（⌘Q），否则剪映会用内存里的版本把新内容盖掉。</div>`},
+ {id:'n6',layer:'branch',c:'daily',x:300,y:820,t:'⑥ 文案脚本',s:'AI 生成 + 人工审核',ya:980,
+  sum:'Skill 方法论驱动，符合 IP 人设，可复用模板',
+  kids:[
+   {t:'开头（定生死）',s:'钩子 / 痛点 / 悬念',x:105,y:750,d:'拆出开头的结构框架，做成可复用模板。开头决定这条视频的生死。'},
+   {t:'中间',s:'框架 / 金句 / 呈现',x:105,y:830,d:'内容结构、金句、呈现方式。'},
+   {t:'结尾（引导行动）',s:'系列 / 评论 / 收藏',x:150,y:910,d:'例如做系列（“这是第一期，后面还有”）；避免“打 666”之类容易限流的引导。'},
+   {t:'脚本分镜',s:'逐字稿 / 画面分镜',x:330,y:910,d:'逐字稿 + 画面分镜，可以用能读视频的模型拆分镜。同一份逐字稿还能一键产出公众号文章。'}],
+  body:`<div class="flowline"><span>开头</span><i>→</i><span>中间</span><i>→</i><span>结尾</span><i>→</i><span>分镜</span><i>→</i><span>公众号</span></div>`},
+ {id:'n5',layer:'branch',c:'daily',x:700,y:1010,t:'⑤ 选题',s:'AI 选题 + 用户意图匹配热点',ya:1100,
+  sum:'按人设出选题，标明受众与目的',
+  kids:[
+   {t:'爆款选题库',s:'持续更新复用',x:890,y:955,d:'爆了就复制，同时留时间探索新爆款，不断循环。分析爆款时看与 IP 和业务的贴合度、转化情况，再拆单条内容。'},
+   {t:'受众 / 目标',s:'被看见 / 引流 / 转化',x:890,y:1055,d:'AI 出选题、生成标题时，同时标明给谁看、为了什么：被看见、引流还是转化。'}],
+  body:`<div><h3>搭选题库的两个采集工具</h3><ol>
+   <li><b>扒逐字稿：</b>喂鱼采集浏览器扩展把爆款视频收进飞书表，用阿里百炼 API 自动转成逐字稿，拆开头、结构和结尾。</li>
+   <li><b>抓评论区：</b>用 Easy Scraper / 抖音评论排序器抓取评论区，按点赞排序导出前 200 条，交给 AI 分析用户痛点，提炼新选题。</li></ol></div>`},
+ {id:'n4',layer:'branch',c:'daily',x:300,y:1100,t:'④ 热点监控',s:'持续进行 · 行业 / 竞品 / 用户需求',ya:1180,
+  sum:'每天自动抓取，人工教 AI 什么是好热点',
+  kids:[
+   {t:'时效热点',s:'每日 170+ 条自动抓取',x:110,y:1050,d:'关键词既要有业务词（AI + IP、AI 自媒体、AI 相关裁员），也要站在用户角度想他们会搜什么（焦虑、转行、就业、提效）。'},
+   {t:'切入点分析',s:'热点与业务的关联',x:110,y:1155,d:'每条热点都要回答：它和我的业务、我的用户有什么关系。'}],
+  body:`<div class="stat"><div><span class="big">170+</span><small>每日自动入库热点</small></div></div>
+   <div><h3>流程</h3><div class="flowline"><span>关键词</span><i>→</i><span>内容抓取</span><i>→</i><span>AI 初筛打标</span><i>→</i><span>人工审核纠偏</span><i>→</i><span>AI 深度分析</span></div></div>`},
+
+ {id:'n3',layer:'trunk',c:'brain',x:500,y:1232,t:'③ IP 大脑',s:'四个核心 MD 文档',
+  sum:'相当于 AI 员工的记忆、入职培训和操作手册',
+  kids:[
+   {t:'灵魂文档',s:'AI 身份 / 性格 / 风格',x:290,y:1195,d:'AI 自己是谁：IP 助理的身份、性格、说话风格（例如给“小龙虾”起名吱吱）。'},
+   {t:'用户档案',s:'老板喜好 / 业务 / 客户',x:710,y:1195,d:'服务的人是谁：老板 / IP 做什么生意、喜好与雷区、关系网、客户与案例。'},
+   {t:'工作流 SOP',s:'场景 → 流程 → 方法论',x:290,y:1267,d:'AI 怎么干活：开工前做什么、怎么记笔记、怎么汇报。'},
+   {t:'工具箱 + 心跳',s:'API 密钥 / 半小时唤醒',x:710,y:1267,d:'账号密码、各类 API 密钥；心跳机制每半小时唤醒一次，提醒定时任务（每日抓热点、复盘）。'}],
+  body:`<div><h3>什么是 Harness 驾驭工程</h3><p>“给马套上马鞍”：用语料、框架和限制，让 AI 按你既定的路线产出符合人设与业务的内容。搭 AI 员工就像招人：先选模型（选人），再做入职培训（IP 大脑），再定 SOP（工作流）。</p></div>
+   <div><h3>四层结构</h3><div class="flowline"><span>场景</span><i>→</i><span>工作流 SOP</span><i>→</i><span>方法论 / 技能</span><i>→</i><span>基于 IP 大脑执行</span></div></div>
+   <div><h3>给 AI 配“眼耳口”</h3><div class="tbl"><table>
+   <tr><td>大脑</td><td>Claude Opus / GPT / Gemini Pro</td></tr>
+   <tr><td>识图</td><td>豆包、阿里</td></tr>
+   <tr><td>语音识别</td><td>豆包、阿里通义听悟；转逐字稿统一用阿里百炼 API</td></tr>
+   <tr><td>克隆音</td><td>Fish Audio、MiniMax</td></tr>
+   <tr><td>绘图 / 视频</td><td>即梦、Nano Banana</td></tr></table></div></div>
+   <div class="tip warn"><b>API 密钥等于钥匙：</b>拿到就能直接用。不要发给任何人，也不要发到公开平台，否则绑定的银行卡可能一夜被刷爆。</div>`},
+
+ {id:'n8',layer:'soil',c:'lib',x:250,y:480,ya:620,t:'⑧ 四大素材库',s:'持续积累 · 爆了复制',
+  sum:'沉淀爆款范式，爆了就复制，再探索新爆款',
+  kids:[
+   {t:'热点监控库',s:'实时动态追踪',x:110,y:555,d:'④ 热点监控每天抓到的内容都入这个库。'},
+   {t:'选题库',s:'持续更新爆款选题',x:265,y:555,d:'⑤ 选题的弹药库，爆款题目可以反复复用。'},
+   {t:'爆款文案库',s:'框架 / 金句 / 结构',x:110,y:610,d:'⑥ 文案脚本的参考样本。'},
+   {t:'视频剪辑库',s:'字体 / 音效 / 转场',x:265,y:610,d:'呈现方式、剪辑技巧、字体、音效、转场模板，含本期的剪映模板与 B-roll 镜头库。'}],
+  body:`<div class="tip"><b>另外还有 IP 素材库：</b>IP 本人的经历、观点、知识、爱好，以及图片和视频“留痕”：开会、参加大会、与行业大咖沟通、辅导学员等高光时刻。</div>`},
+ {id:'n9',layer:'soil',c:'skill',x:750,y:480,ya:620,t:'⑨ Skill 技能包',s:'扒逐字稿 → AI 分析 → 方法论',
+  sum:'Skill = 触发关键词 + 流程 + 方法论 + 产出标准',
+  kids:[
+   {t:'选题 Skill',s:'找爆款 / 梳理规律',x:735,y:555,d:'找爆款、梳理爆款规律。'},
+   {t:'文案 Skill',s:'开头 / 结构 / 结尾',x:890,y:555,d:'开头、结构、结尾模板，按最小单位各做一个。'},
+   {t:'脚本 Skill',s:'逐字稿 / 分镜模板',x:735,y:610,d:'逐字稿和分镜模板。'},
+   {t:'方法论来源',s:'账号 / 课程 / 实践',x:890,y:610,d:'优质账号、课程、自己的实践。'}],
+  body:`<div><h3>做一个 Skill 的五步</h3><ol>
+   <li><b>找来源：</b>优质账号（视频 / 直播）、课程、自己的实践。</li>
+   <li><b>扒数据：</b>按点赞排序，用阿里百炼 API 提取逐字稿，例如只提取开头 2～3 句（约 30 字）。</li>
+   <li><b>让 AI 抽象：</b>一次给约 200 条样本（受上下文约 200K 限制），总结成可复用的方法并封装成 Skill。</li>
+   <li><b>单个拆：</b>选题、开头、框架、结尾、脚本各做一个，不要一次全拆。</li>
+   <li><b>人工 review：</b>AI 给的所有东西都要人工审核。</li></ol></div>
+   <div class="stat"><div><span class="big">200</span><small>一次喂给 AI 的样本</small></div><div><span class="big">30 字</span><small>只扒开头 2～3 句</small></div></div>
+   <div class="tip"><b>小技巧：</b>给 AI 两条同选题、数据天差地别的视频，问“为什么这两个开头效果差这么多”，也能反过来提升自己。</div>`},
+
+ {id:'n1',layer:'root',c:'root',x:300,y:1405,t:'① 调研',s:'内部了解业务 / 外部看爆款',
+  sum:'先搞清楚 IP 是谁，市场上什么在爆',
+  kids:[
+   {t:'内部',s:'IP 定位 / 业务了解',x:170,y:1492,d:'了解 IP 是什么样的人、做什么业务。'},
+   {t:'外部',s:'市场 / 竞品 / 爆款范式',x:360,y:1497,d:'市场环境、竞品、行业有哪些爆款范式。'}]},
+ {id:'n2',layer:'root',c:'root',x:700,y:1405,t:'② 定方案',s:'人设 / 内容配比 / 更新频率',
+  sum:'根据调研定下 IP 人设和内容策略',
+  kids:[
+   {t:'IP 人设',s:'性格 / 风格 / 定位',x:640,y:1497,d:'IP 的性格、风格、定位。'},
+   {t:'内容策略',s:'配比 / 周更 / 月更',x:830,y:1492,d:'内容配比怎么配，一周几更、一个月几更。'}]},
+];
+const ORDER = ['s1','s2','n1','n2','n3','n4','n5','n6','n7','n8','n9','n10','n11'];
+const byId = Object.fromEntries(N.map(n=>[n.id,n]));
+const NS='http://www.w3.org/2000/svg';
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs){const v=String(attrs[k]);if(v.includes('var(')&&/^(fill|stroke|stop-color)$/.test(k))e.style.setProperty(k,v);else e.setAttribute(k,v)}parent&&parent.appendChild(e);return e};
+const V=k=>`var(--${k})`;
+
+/* bands + ruler */
+const gB=document.getElementById('bands');
+LAYERS.forEach((L,i)=>{
+  const g=el('g',{class:'band','data-layer':L.key,tabindex:0,role:'button','aria-label':`只看${L.name}层`},gB);
+  if(L.fill) el('rect',{x:-150,y:L.y0,width:1150,height:L.y1-L.y0,fill:V(L.fill.slice(2)),opacity:L.key==='root'?.8:.55},g);
+  el('line',{x1:-150,x2:1000,y1:L.y0,y2:L.y0,stroke:V('line'),'stroke-dasharray':'3 6'},g);
+  const ty=(L.y0+L.y1)/2;
+  el('text',{x:-130,y:ty-4,class:'band-label'},g).textContent=L.name;
+  el('text',{x:-130,y:ty+16,class:'band-sub'},g).textContent=L.sub.split(' · ')[0];
+  el('text',{x:-130,y:ty+32,class:'band-sub'},g).textContent=L.sub.split(' · ')[1]||'';
+});
+el('line',{x1:-150,x2:1000,y1:1312,y2:1312,stroke:V('bark'),'stroke-width':2},gB);
+
+/* sky decor: sun */
+const sun=el('g',{class:'pulse'},gB);
+el('circle',{cx:500,cy:62,r:22,fill:V('gold'),opacity:.85},sun);
+for(let a=0;a<12;a++){const r=Math.PI*2*a/12;el('line',{x1:500+Math.cos(r)*30,y1:62+Math.sin(r)*30,x2:500+Math.cos(r)*40,y2:62+Math.sin(r)*40,stroke:V('gold'),'stroke-width':3,'stroke-linecap':'round'},sun)}
+
+/* canopy */
+const gC=document.getElementById('canopy');
+[[500,700,360],[300,780,200],[700,760,210],[300,1020,180],[700,1000,190],[500,330,230],[500,1040,220],[260,520,180],[740,520,180]].forEach(([cx,cy,r],i)=>
+  el('circle',{cx,cy,r,fill:V(i%2?'canopy2':'canopy'),opacity:.55},gC));
+// decorative leaves
+const leafSpots=[[60,470],[950,470],[420,560],[150,450],[860,380],[420,450],[600,700],[200,780],[820,700],[380,820],[620,440],[240,390],[770,890],[460,600],[930,620],[70,700]];
+leafSpots.forEach(([x,y],i)=>{const g=el('g',{class:'sway',style:`animation-delay:${-i*0.7}s`},gC);
+  el('path',{d:`M${x} ${y} q -9 -14 0 -26 q 9 12 0 26 z`,fill:V('brain-s'),opacity:.35},g)});
+
+/* wood: trunk, branches, roots */
+const gW=document.getElementById('wood');
+el('path',{d:'M462 1320 C 478 1150, 482 900, 492 330 L 508 330 C 518 900, 522 1150, 538 1320 Z',fill:'url(#gTrunk)'},gW);
+const branch=(n)=>{const dx=n.x-500,ya=n.ya;return `M500 ${ya} C ${500+dx*0.3} ${ya-10}, ${n.x-dx*0.45} ${n.y+50}, ${n.x} ${n.y}`};
+['n4','n5','n6','n7','n8','n9'].forEach(id=>el('path',{d:branch(byId[id]),fill:'none',stroke:V('bark'),'stroke-width':/n[89]/.test(id)?9:13,'stroke-linecap':'round'},gW));
+const roots={n1:'M492 1312 C 488 1360, 340 1350, 300 1405',n2:'M508 1312 C 512 1360, 660 1350, 700 1405'};
+Object.values(roots).forEach(d=>el('path',{d,fill:'none',stroke:V('root'),'stroke-width':12,'stroke-linecap':'round'},gW));
+['M500 1320 C 500 1400, 480 1460, 500 1535','M496 1320 C 450 1370, 420 1400, 410 1450','M504 1320 C 550 1370, 580 1400, 590 1450']
+  .forEach(d=>el('path',{d,fill:'none',stroke:V('root'),'stroke-width':4,opacity:.6,'stroke-linecap':'round'},gW));
+
+/* twigs to leaves */
+const gT=document.getElementById('twigs');
+N.forEach(n=>(n.kids||[]).forEach((k,i)=>{
+  const mx=(n.x+k.x)/2+(k.y-n.y)*0.15, my=(n.y+k.y)/2-(k.x-n.x)*0.08;
+  el('path',{d:`M${n.x} ${n.y} Q ${mx} ${my} ${k.x} ${k.y}`,fill:'none',stroke:V(n.layer==='root'?'root':n.layer==='soil'?(n.c+'-s'):'bark'),'stroke-width':n.layer==='soil'?2:3,'stroke-dasharray':n.layer==='soil'?'4 5':'',class:'twig','data-p':n.id,'data-layer':n.layer,opacity:.75},gT);
+}));
+el('path',{d:'M500 330 L 500 228',stroke:V('bark'),'stroke-width':5,class:'twig','data-p':'n11','data-layer':'fruit'},gT);
+
+/* sap flows: soil → trunk → branches → fruit */
+const gF=document.getElementById('flows');
+const flow=(d,c,w=4)=>el('path',{d,class:'flow',stroke:V(c),'stroke-width':w},gF);
+flow('M500 1312 L 500 236','gold',5);
+['n4','n5','n6','n7'].forEach(id=>flow(branch(byId[id]),'gold'));
+flow(branch(byId.n8),'lib-s');
+flow(branch(byId.n9),'skill-s');
+flow('M300 1405 C 340 1350, 488 1360, 492 1312','root-s',3);
+flow('M700 1405 C 660 1350, 512 1360, 508 1312','root-s',3);
+
+/* nodes */
+const gN=document.getElementById('nodes');
+function drawBox(g,cx,cy,w,h,c,rx){
+  const b=el('g',{class:'box'},g);
+  el('rect',{class:'shape',x:cx-w/2,y:cy-h/2,width:w,height:h,rx,fill:V(c+'-f'),stroke:V(c+'-s'),'stroke-width':1.6},b);
+  return b;
+}
+N.forEach(n=>{
+  (n.kids||[]).forEach((k,i)=>{
+    const g=el('g',{class:'node leaf','data-p':n.id,'data-k':i,'data-layer':n.layer,tabindex:0,role:'button','aria-label':`${k.t}：${k.s}`,style:`--glow:${V(n.c+'-s')}`},gN);
+    const b=drawBox(g,k.x,k.y,146,46,n.c,23);
+    el('text',{x:k.x,y:k.y-3,'text-anchor':'middle',class:'t'},b).textContent=k.t;
+    el('text',{x:k.x,y:k.y+14,'text-anchor':'middle',class:'s'},b).textContent=k.s;
+  });
+});
+N.forEach(n=>{
+  const g=el('g',{class:'node main','data-id':n.id,'data-layer':n.layer,tabindex:0,role:'button','aria-label':`${n.t}：${n.s}`,style:`--glow:${V(n.c+'-s')}`},gN);
+  if(n.fruit){
+    const b=el('g',{class:'box'},g);
+    el('circle',{class:'shape',cx:n.x,cy:n.y,r:48,fill:'url(#gFruit)',stroke:V('skill-s'),'stroke-width':1.6},b);
+    el('path',{d:`M${n.x+4} ${n.y-46} q 22 -18 38 -6 q -18 14 -38 6z`,fill:V('brain-s')},b);
+    el('text',{x:n.x,y:n.y+2,'text-anchor':'middle',class:'t',style:'font-family:var(--f-display);font-weight:400;font-size:20px'},b).textContent='知识库';
+    el('text',{x:n.x,y:n.y+20,'text-anchor':'middle',class:'s'},b).textContent='最终产出';
+    return;
+  }
+  const w=n.w||224,h=n.h||60;
+  const b=drawBox(g,n.x,n.y,w,h,n.c,14);
+  el('text',{x:n.x,y:n.y-4,'text-anchor':'middle',class:'t'},b).textContent=n.t;
+  el('text',{x:n.x,y:n.y+16,'text-anchor':'middle',class:'s'},b).textContent=n.s;
+});
+
+/* layer chips */
+const chipBox=document.getElementById('layers');
+[...LAYERS].reverse().forEach(L=>{
+  const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.layer=L.key;b.setAttribute('aria-pressed','false');
+  const c={sky:'sky',fruit:'fruit',branch:'daily',trunk:'brain',soil:'lib',root:'root'}[L.key];
+  b.innerHTML=`<span class="dot" style="background:var(--${c}-s)"></span>${L.name}`;
+  chipBox.appendChild(b);
+});
+const svg=document.getElementById('tree');
+function focusLayer(key){
+  if(key){svg.dataset.focus=key}else{delete svg.dataset.focus}
+  svg.querySelectorAll('.node,.twig').forEach(e=>e.classList.toggle('in-focus',!!key&&e.dataset.layer===key));
+  chipBox.querySelectorAll('[data-layer]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.layer||'')===(key||''))));
+}
+chipBox.addEventListener('click',e=>{const b=e.target.closest('[data-layer]');if(b)focusLayer(b.dataset.layer||null)});
+gB.addEventListener('click',e=>{const b=e.target.closest('.band');if(b)focusLayer(svg.dataset.focus===b.dataset.layer?null:b.dataset.layer)});
+
+/* ===== 对话框 ===== */
+const wrapEl=document.getElementById('wrap'),talk=document.getElementById('talk');
+const tWho=document.getElementById('tWho'),tTitle=document.getElementById('tTitle'),tSub=document.getElementById('tSub'),tBody=document.getElementById('tBody');
+const tPrev=document.getElementById('tPrev'),tNext=document.getElementById('tNext'),tPlay=document.getElementById('tPlay'),tBar=document.getElementById('tBar'),tCount=document.getElementById('tCount');
+const stageEl=document.getElementById('stage');
+let current=null;
+function fillTalk(id,kidIdx){
+  const n=byId[id];current=id;
+  talk.style.setProperty('--glow',V(n.c+'-s'));
+  tWho.innerHTML=`<b>云云</b> · ${STAGE[n.layer]}`;
+  tTitle.textContent=n.t; tSub.textContent=n.sum||n.s;
+  let html='';
+  if(n.kids)html+=`<div><h3>分支 · ${n.kids.length} 个</h3><div class="kids">${n.kids.map((k,i)=>`<div class="kid" data-k="${i}"><b>${k.t}</b><small>${k.s}</small><span>${k.d}</span></div>`).join('')}</div></div>`;
+  html+=n.body||'';
+  tBody.innerHTML=html;tBody.scrollTop=0;
+  const i=ORDER.indexOf(id);
+  tPrev.disabled=i<=0; tNext.disabled=i>=ORDER.length-1;
+  tCount.textContent=`第 ${i+1} / ${ORDER.length} 站`;
+  tBar.style.width='0';
+  if(kidIdx!=null){const k=tBody.querySelector(`.kid[data-k="${kidIdx}"]`);if(k)requestAnimationFrame(()=>{tBody.scrollTop=k.offsetTop-tBody.offsetTop-8;k.classList.add('flash')})}
+}
+function placeTalk(){
+  if(isMobile())return;
+  const wr=wrapEl.getBoundingClientRect();
+  const pt=svg.createSVGPoint();pt.x=pos.x;pt.y=pos.y;const sp=pt.matrixTransform(svg.getScreenCTM());
+  const sx=sp.x-wr.left, sy=sp.y-wr.top, W=talk.offsetWidth, H=talk.offsetHeight;
+  const right = sx < wr.width/2 ? true : false;
+  let left = right ? sx+34 : sx-34-W;
+  left=Math.max(8,Math.min(wr.width-W-8,left));
+  let top=Math.max(8,Math.min(wrapEl.offsetHeight-H-8,sy-H*0.4));
+  talk.style.left=left+'px';talk.style.top=top+'px';
+  talk.classList.toggle('tail-l',right);talk.classList.toggle('tail-r',!right);
+  talk.style.setProperty('--tail',Math.max(16,Math.min(H-30,sy-top-7))+'px');
+}
+function showTalk(id,kidIdx){
+  fillTalk(id,kidIdx);
+  talk.classList.add('on');talk.setAttribute('aria-hidden','false');
+  placeTalk();
+}
+function hideTalk(){talk.classList.remove('on');talk.setAttribute('aria-hidden','true')}
+function mark(id){
+  svg.querySelectorAll('.node.active').forEach(e=>e.classList.remove('active'));
+  if(!id)return;
+  svg.querySelector(`.node.main[data-id="${id}"]`)?.classList.add('active');
+  svg.querySelectorAll(`.leaf[data-p="${id}"]`).forEach(e=>e.classList.add('active'));
+}
+
+/* ===== 小精灵 云云 ===== */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile=()=>matchMedia('(max-width:760px)').matches;
+const spriteLayer=el('g',{},svg);
+const sparks=el('g',{},spriteLayer);
+const bubble=el('g',{class:'bubble'},spriteLayer);
+const bRect=el('rect',{rx:13,height:28},bubble);
+const bText=el('text',{'text-anchor':'middle'},bubble);
+const sprite=el('g',{class:'sprite',tabindex:0,role:'button','aria-label':'小精灵云云：点我开始走一遍流程'},spriteLayer);
+sprite.innerHTML=`<g class="bob"><g class="flip">
+  <circle r="26" fill="url(#gGlow)"/>
+  <path class="wing l" d="M-3 0 C -20 -20, -30 -2, -15 6 C -10 8, -6 5, -3 0Z" style="fill:var(--sky);stroke:var(--lib-s);stroke-width:1.2;opacity:.9"/>
+  <path class="wing r" d="M3 0 C 20 -20, 30 -2, 15 6 C 10 8, 6 5, 3 0Z" style="fill:var(--sky);stroke:var(--lib-s);stroke-width:1.2;opacity:.9"/>
+  <path d="M-6 3 L6 3 L10 17 Q0 20 -10 17 Z" style="fill:var(--brain-s)"/>
+  <line x1="0" y1="-13" x2="5" y2="-22" style="stroke:var(--bark);stroke-width:1.4"/>
+  <circle cx="5.5" cy="-23" r="2.6" style="fill:var(--gold)"/>
+  <circle cy="-5" r="8.5" style="fill:#FFE1C6"/>
+  <path d="M-8.5 -6 Q -8 -15 0 -14.5 Q 8 -15 8.5 -6 Q 4 -10 0 -9.5 Q -5 -10 -8.5 -6Z" style="fill:var(--bark)"/>
+  <circle cx="-3" cy="-4.5" r="1.3" style="fill:#2A1D14"/><circle cx="3" cy="-4.5" r="1.3" style="fill:#2A1D14"/>
+  <circle cx="-5" cy="-1.8" r="1.6" style="fill:#F28FA8;opacity:.6"/><circle cx="5" cy="-1.8" r="1.6" style="fill:#F28FA8;opacity:.6"/>
+  <path d="M-1.8 -1 Q 0 0.8 1.8 -1" style="fill:none;stroke:#2A1D14;stroke-width:1"/>
+  <line x1="8" y1="8" x2="17" y2="-1" style="stroke:var(--bark);stroke-width:1.6;stroke-linecap:round"/>
+  <path d="M17 -6 l1.5 3.5 3.5 1.5 -3.5 1.5 -1.5 3.5 -1.5 -3.5 -3.5 -1.5 3.5 -1.5z" style="fill:var(--gold)"/>
+</g></g>`;
+const flipG=sprite.querySelector('.flip');
+let pos={x:420,y:78},token=0,auto=false,hover=false,loopId=0;
+function setPos(p){pos=p;sprite.setAttribute('transform',`translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`)}
+function say(text){
+  if(!text){bubble.style.opacity=0;return}
+  bText.textContent=text;
+  const w=[...text].reduce((a,ch)=>a+(ch.charCodeAt(0)>255?14.5:8),0)+28;
+  const bx=Math.max(-140+w/2,Math.min(995-w/2,pos.x)), by=Math.max(4,pos.y-62);
+  bRect.setAttribute('x',bx-w/2);bRect.setAttribute('y',by);bRect.setAttribute('width',w);
+  bText.setAttribute('x',bx);bText.setAttribute('y',by+19);
+  bubble.style.opacity=1;
+}
+function spark(x,y,big){
+  const colors=['gold','sky-s','rose-s','lib-s'];
+  const c=el('circle',{cx:x+(Math.random()-.5)*14,cy:y+(Math.random()-.5)*14,r:big?3+Math.random()*3:1.5+Math.random()*2.2,class:'spark',fill:V(colors[Math.floor(Math.random()*colors.length)])},sparks);
+  setTimeout(()=>c.remove(),950);
+}
+function spot(id){
+  const n=byId[id];
+  if(n.fruit)return{x:n.x+72,y:n.y-14};
+  const w=n.w||224,side=n.x>520?-1:1;
+  return{x:n.x+side*(w/2+28),y:n.y-6};
+}
+function follow(p){
+  if(stageEl.scrollWidth>stageEl.clientWidth){const r=stageEl.scrollWidth/1150;stageEl.scrollTo({left:(p.x+150)*r-stageEl.clientWidth/2,behavior:'smooth'})}
+}
+/* 镜头：让页面上下移动，把云云保持在屏幕中线 */
+function camera(k){
+  const pt=svg.createSVGPoint();pt.x=pos.x;pt.y=pos.y;const s=pt.matrixTransform(svg.getScreenCTM());
+  const target=isMobile()?innerHeight*0.22:innerHeight/2;
+  const d=s.y-target;
+  if(Math.abs(d)>0.5)window.scrollBy(0,d*k);
+}
+function settle(my){
+  return new Promise(res=>{
+    if(reduce){camera(1);return res()}
+    let n=0;(function tick(){if(my!==token||n++>45)return res();camera(0.2);requestAnimationFrame(tick)})();
+  });
+}
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+function fly(to,my){
+  return new Promise(res=>{
+    say('');
+    if(reduce){setPos(to);return res()}
+    const from={...pos},dist=Math.hypot(to.x-from.x,to.y-from.y);
+    if(dist<2)return res();
+    const c={x:(from.x+to.x)/2+(to.y-from.y)*0.18,y:Math.min(from.y,to.y)-60-dist*0.12};
+    const dur=Math.max(700,Math.min(2000,500+dist*1.2));
+    flipG.setAttribute('transform',`scale(${to.x<from.x?-1:1} 1)`);
+    const t0=performance.now();let last=0;
+    (function tick(now){
+      if(my!==token)return res();
+      const t=Math.min(1,(now-t0)/dur),e=ease(t),u=1-e;
+      setPos({x:u*u*from.x+2*u*e*c.x+e*e*to.x,y:u*u*from.y+2*u*e*c.y+e*e*to.y});
+      if(now-last>45){spark(pos.x,pos.y+6);last=now}
+      camera(0.14);
+      t<1?requestAnimationFrame(tick):res();
+    })(t0);
+  });
+}
+async function go(id,kidIdx){
+  const my=++token;
+  hideTalk();
+  const to=spot(id);follow(to);
+  await fly(to,my);if(my!==token)return;
+  mark(id);say('');
+  for(let i=0;i<6;i++)spark(pos.x,pos.y,true);
+  showTalk(id,kidIdx);
+  await settle(my);if(my!==token)return;
+  if(auto)runTimer(my);
+}
+function dwell(id){const n=byId[id];const len=(tBody.textContent||'').length;return Math.max(6000,Math.min(18000,4000+len*22))}
+function runTimer(my){
+  const lid=++loopId,d=dwell(current);let el0=0,prev=performance.now();
+  (function tick(now){
+    if(lid!==loopId||my!==token||!auto)return;
+    if(!hover)el0+=now-prev;prev=now;
+    tBar.style.width=Math.min(100,el0/d*100)+'%';
+    if(el0>=d){const i=ORDER.indexOf(current);if(i<ORDER.length-1)go(ORDER[i+1]);else finish();return}
+    requestAnimationFrame(tick);
+  })(prev);
+}
+function setAuto(v){
+  auto=v;loopId++;
+  tPlay.textContent=auto?'⏸ 暂停':'▶ 自动';
+  tourBtn.textContent=auto?'⏸ 让云云停一下':'✨ 跟着精灵云云走一遍流程';
+  if(!auto)tBar.style.width='0';
+}
+function finish(){
+  setAuto(false);
+  say('结果啦！这就是知识库');
+  for(let i=0;i<40;i++)setTimeout(()=>spark(pos.x-70+Math.random()*140,pos.y-50+Math.random()*90,true),i*35);
+}
+function step(d){const i=current?ORDER.indexOf(current)+d:0;if(ORDER[i])go(ORDER[i])}
+function closeTalk(){token++;setAuto(false);hideTalk();mark(null);say('想听哪一站，点它就行～');current=null}
+
+const tourBtn=document.getElementById('tour');
+function startTour(){focusLayer(null);setAuto(true);go(ORDER[0])}
+tourBtn.onclick=()=>{if(auto){setAuto(false)}else if(current&&current!==ORDER[ORDER.length-1]&&talk.classList.contains('on')){setAuto(true);runTimer(token)}else startTour()};
+tPlay.onclick=()=>{if(auto)setAuto(false);else{setAuto(true);runTimer(token)}};
+tPrev.onclick=()=>step(-1);tNext.onclick=()=>step(1);
+document.getElementById('tClose').onclick=closeTalk;
+talk.addEventListener('mouseenter',()=>hover=true);talk.addEventListener('mouseleave',()=>hover=false);
+sprite.addEventListener('click',()=>{if(auto)setAuto(false);else if(!current)startTour();else{setAuto(true);runTimer(token)}});
+gN.addEventListener('click',e=>{
+  const g=e.target.closest('.node');if(!g)return;
+  setAuto(false);
+  if(g.classList.contains('leaf'))go(g.dataset.p,+g.dataset.k);else go(g.dataset.id);
+});
+document.addEventListener('keydown',e=>{
+  const g=e.target.closest&&e.target.closest('.node,.band,.sprite');
+  if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();g.dispatchEvent(new MouseEvent('click',{bubbles:true}));return}
+  if(!talk.classList.contains('on'))return;
+  if(e.key==='Escape')closeTalk();
+  if(e.key==='ArrowRight')step(1);
+  if(e.key==='ArrowLeft')step(-1);
+});
+addEventListener('resize',()=>{if(talk.classList.contains('on'))placeTalk()});
+setPos(pos);say('嗨，我是云云，点我出发！');
+
+/* center the tree on narrow screens */
+const st=document.getElementById('stage');if(st.scrollWidth>st.clientWidth)st.scrollLeft=(st.scrollWidth-st.clientWidth)/2;
+</script>
+
+</body></html>

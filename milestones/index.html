@@ -1,0 +1,449 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>方世云 · IP运营</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.cn">
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, whiteboard-style panels for 里程碑 / 进阶 / 链路, pastel stage colours borrowed from the portfolio boards */
+:root{
+  --bg:#f3f4f8; --panel:#ffffff; --ink:#1c1f2e; --muted:#5d6275; --line:#dfe2ec;
+  --accent:#3340b0; --accent-soft:#e6e8fb;
+  --blue:#dfe7ff; --blue-ink:#2c47a8;
+  --green:#ddf3dd; --green-ink:#2f7a3a;
+  --violet:#ece3fb; --violet-ink:#6a3fb5;
+  --rose:#fde3e6; --rose-ink:#b03a4c;
+  --amber:#fdf0d5; --amber-ink:#9a6a10;
+  --f-display:"Noto Serif SC","Songti SC",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12141c; --panel:#1b1e29; --ink:#e8eaf3; --muted:#9aa0b6; --line:#2d3142;
+  --accent:#9aa5ff; --accent-soft:#262b4d;
+  --blue:#1f2a4d; --blue-ink:#a9bcff; --green:#1d3524; --green-ink:#94d9a0;
+  --violet:#2e2447; --violet-ink:#c9aaf7; --rose:#3d2228; --rose-ink:#f3a3b0;
+  --amber:#3a2f17; --amber-ink:#f0c76f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12141c; --panel:#1b1e29; --ink:#e8eaf3; --muted:#9aa0b6; --line:#2d3142;
+  --accent:#9aa5ff; --accent-soft:#262b4d;
+  --blue:#1f2a4d; --blue-ink:#a9bcff; --green:#1d3524; --green-ink:#94d9a0;
+  --violet:#2e2447; --violet-ink:#c9aaf7; --rose:#3d2228; --rose-ink:#f3a3b0;
+  --amber:#3a2f17; --amber-ink:#f0c76f; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+.wrap{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,3.4vw,30px);letter-spacing:.02em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.sec-head{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.sec-head p{margin:0;color:var(--muted);max-width:60ch}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.board{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px 40px;align-items:end}
+.hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(48px,9vw,84px);line-height:1;letter-spacing:.06em}
+.role{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{font-size:13px;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:500}
+.chip.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.contact{display:flex;flex-direction:column;gap:8px;font-size:14px;min-width:0}
+.contact .row{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.contact span.val{font-family:var(--f-mono);user-select:all;word-break:break-all}
+.copy{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:6px;padding:2px 8px;cursor:pointer}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+.lede{grid-column:1/-1;margin:0;font-size:17px;max-width:62ch;color:var(--ink)}
+.lede b{color:var(--accent);font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.stat{background:var(--panel);padding:20px 22px;display:flex;flex-direction:column;gap:2px}
+.stat .v{font-family:var(--f-mono);font-size:clamp(26px,3.6vw,34px);font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat .v small{font-size:.5em;margin-left:2px;color:var(--muted)}
+.stat .k{font-size:13px;color:var(--muted)}
+
+/* Milestones (horizontal board, stacks on phone) */
+.ms-scroll{overflow-x:auto;padding-bottom:4px}
+.ms{position:relative;display:grid;grid-template-columns:repeat(8,minmax(118px,1fr));grid-template-rows:auto 36px auto;min-width:940px}
+.ms::before{content:"";position:absolute;left:0;right:0;top:calc(50%);height:0;border-top:2px dashed var(--line)}
+.ms-item{display:contents}
+.card{border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.5;margin:0 6px}
+.card b{display:block;font-size:15px;font-weight:700;margin-bottom:2px}
+.card.up{grid-row:1;align-self:end}
+.card.down{grid-row:3;align-self:start}
+.dot{grid-row:2;justify-self:center;align-self:center;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.dot i{width:12px;height:12px;border-radius:50%;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--line)}
+.dot em{position:absolute;font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.dot.dl em{top:18px} .dot.du em{bottom:18px}
+.c-blue{background:var(--blue);color:var(--blue-ink)} .c-blue~i,.i-blue{background:var(--blue-ink)}
+.c-green{background:var(--green);color:var(--green-ink)}
+.c-violet{background:var(--violet);color:var(--violet-ink)}
+.c-rose{background:var(--rose);color:var(--rose-ink)}
+.c-amber{background:var(--amber);color:var(--amber-ink)}
+.i-green{background:var(--green-ink)} .i-violet{background:var(--violet-ink)} .i-rose{background:var(--rose-ink)} .i-amber{background:var(--amber-ink)}
+.ms-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;font-size:13px;color:var(--muted)}
+.ms-legend span{display:inline-flex;align-items:center;gap:6px}
+.ms-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+/* Progression table */
+.prog-scroll{overflow-x:auto}
+.prog{display:grid;grid-template-columns:minmax(220px,1.3fr) 1fr 1.2fr 1.2fr;gap:12px 14px;min-width:820px;align-items:stretch}
+.prog .h{justify-self:center;font-size:13px;font-weight:700;padding:4px 16px;border-radius:999px;border:1.5px solid currentColor}
+.h.h1{color:var(--rose-ink);background:var(--rose)} .h.h2{color:var(--green-ink);background:var(--green)}
+.h.h3{color:var(--violet-ink);background:var(--violet)} .h.h4{color:var(--rose-ink);background:var(--rose)}
+.step{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:12px;font-weight:700;font-size:14px;line-height:1.35}
+.step small{font-family:var(--f-mono);font-weight:400;font-size:12px;opacity:.8}
+.step.s1{clip-path:polygon(30% 0,70% 0,78% 100%,22% 100%);background:var(--rose);color:var(--rose-ink)}
+.step.s2{clip-path:polygon(20% 0,80% 0,88% 100%,12% 100%);background:var(--violet);color:var(--violet-ink)}
+.step.s3{clip-path:polygon(10% 0,90% 0,98% 100%,2% 100%);background:var(--blue);color:var(--blue-ink)}
+.step.s4{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);background:var(--amber);color:var(--amber-ink);border-radius:8px}
+.cell{border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.55;display:flex;align-items:center}
+.cell.data{justify-content:center;text-align:center;font-family:var(--f-mono);font-size:14px;font-weight:500}
+.cell.dashed{border-style:dashed;color:var(--muted)}
+.prog-note{margin:16px 0 0;font-size:13px;color:var(--muted)}
+
+/* Flow */
+.flow-scroll{overflow-x:auto}
+.flow svg{display:block;min-width:900px;width:100%;height:auto}
+.flow .node rect,.flow .node path{fill:var(--panel);stroke:var(--ink);stroke-width:1.3}
+.flow .term rect{fill:var(--ink);stroke:var(--ink)}
+.flow .term text{fill:var(--panel)}
+.flow .dec path{fill:var(--ink)}
+.flow .dec text{fill:var(--panel)}
+.flow .soft rect{fill:var(--accent-soft);stroke:var(--accent)}
+.flow .soft text{fill:var(--accent)}
+.flow text{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.flow .lbl{fill:var(--muted);font-size:12px;font-family:var(--f-mono)}
+.flow .edge{stroke:var(--muted);stroke-width:1.3;fill:none}
+.flow .ah{fill:var(--muted)}
+.flow .noteBox{fill:var(--panel);stroke:var(--line)}
+
+/* Works */
+.works{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.work{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.work .tag{font-size:12px;color:var(--muted)}
+.work h3{font-family:var(--f-display);font-weight:900;font-size:20px;line-height:1.4}
+.work .nums{display:flex;gap:28px;flex-wrap:wrap}
+.work .nums div{display:flex;flex-direction:column}
+.work .nums .v{font-family:var(--f-mono);font-size:24px;font-weight:500;font-variant-numeric:tabular-nums}
+.work .nums .k{font-size:12px;color:var(--muted)}
+.work p{margin:0;font-size:13px;color:var(--muted)}
+
+/* Method */
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0;border-top:1px solid var(--line)}
+.m{padding:20px 20px 20px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:88px 1fr;gap:14px;min-width:0}
+.m h3{font-size:15px;font-weight:700}
+.m p{margin:0;font-size:14px;color:var(--muted)}
+.m .tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.m .tools span{font-family:var(--f-mono);font-size:12px;border:1px solid var(--line);padding:1px 8px;border-radius:5px;color:var(--ink)}
+
+/* Experience detail */
+.jobs{display:flex;flex-direction:column;gap:0}
+.job{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--line)}
+.job:last-child{border-bottom:1px solid var(--line)}
+.job .when{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.job h3{font-size:17px;font-weight:700}
+.job h3 span{font-weight:400;color:var(--muted);font-size:14px;margin-left:8px}
+.job ul{margin:8px 0 0;padding-left:18px;font-size:14px;max-width:70ch}
+.job li{margin:2px 0}
+.job li b{font-weight:700}
+
+.foot{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.foot .board{padding:22px}
+.foot h3{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:8px;letter-spacing:.06em}
+.foot p{margin:0}
+.certs{display:flex;flex-wrap:wrap;gap:8px}
+.certs span{font-size:13px;padding:3px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.portfolio{font-size:14px;color:var(--muted);text-align:center}
+
+@media (max-width:720px){
+  body{padding-block:24px 48px}
+  .wrap{gap:44px}
+  .hero{grid-template-columns:1fr}
+  .contact .row{justify-content:flex-start}
+  .stats{grid-template-columns:1fr 1fr}
+  .board{padding:18px}
+  .works,.foot{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr;gap:4px}
+  /* milestones stack vertically */
+  .ms{display:flex;flex-direction:column;min-width:0;gap:0;padding-left:22px}
+  .ms::before{left:5px;right:auto;top:6px;bottom:6px;height:auto;border-top:0;border-left:2px dashed var(--line)}
+  .ms-item{display:flex;flex-direction:column;gap:6px;position:relative;padding-bottom:18px}
+  .dot{position:absolute;left:-22px;top:2px;align-items:flex-start}
+  .dot em{position:static;margin-left:20px;margin-top:-17px}
+  .card{margin:22px 0 0}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card{transition:transform .2s}
+  .card:hover{transform:translateY(-2px)}
+}
+</style>
+
+<main class="wrap">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Resume · IP Operations</div>
+      <h1 style="margin-top:12px">方世云</h1>
+      <div class="role">
+        <span class="chip plain">6年工作经验</span>
+      </div>
+    </div>
+    <p class="lede">4 年 IP 运营，主做<b>女性成长、职场处世与健康</b>内容。从选题研究、脚本分镜到剪辑复盘全流程负责，任职期间把一个创始人 IP 从 <b>1 万粉做到 100 万粉</b>。</p>
+  </header>
+
+  <section class="stats" aria-label="核心数据">
+    <div class="stat"><span class="v">6.96<small>亿</small></span><span class="k">素肌任职期累计播放</span></div>
+    <div class="stat"><span class="v">100<small>万+</small></span><span class="k">IP 粉丝突破（2026.04）</span></div>
+    <div class="stat"><span class="v">1456.86<small>万</small></span><span class="k">素肌任职期累计获赞</span></div>
+    <div class="stat"><span class="v">727<small>条</small></span><span class="k">两段新媒体经历视频产出</span></div>
+  </section>
+
+  <!-- Milestones -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Milestones</span>
+      <h2>成果里程碑</h2>
+      <p>六年三段经历，按时间排开的关键节点。</p>
+    </div>
+    <div class="board">
+      <div class="ms-scroll">
+        <div class="ms">
+          <div class="ms-item">
+            <div class="card up c-amber" style="grid-column:1"><b>网销运营起步</b>东风本田 · 维护汽车之家、易车、懂车帝</div>
+            <div class="dot dl" style="grid-column:1"><i class="i-amber"></i><em>2020.07</em></div>
+          </div>
+          <div class="ms-item">
+            <div class="dot du" style="grid-column:2"><i class="i-amber"></i><em>2022.08</em></div>
+            <div class="card down c-amber" style="grid-column:2"><b>单月 8 台成交</b>两年线上平台零扣分</div>
+          </div>
+          <div class="ms-item">
+            <div class="card up c-green" style="grid-column:3"><b>转型新媒体</b>沐辰健康 · 接手 60w 粉健康账号</div>
+            <div class="dot dl" style="grid-column:3"><i class="i-green"></i><em>2022.10</em></div>
+          </div>
+          <div class="ms-item">
+            <div class="dot du" style="grid-column:4"><i class="i-green"></i><em>2024.08</em></div>
+            <div class="card down c-green" style="grid-column:4"><b>涨粉至 83w</b>543 条视频 · 总播放 3852w</div>
+          </div>
+          <div class="ms-item">
+            <div class="card up c-blue" style="grid-column:5"><b>入职素肌</b>IP 编导 · 女性成长创始人 IP</div>
+            <div class="dot dl" style="grid-column:5"><i class="i-blue"></i><em>2024.12</em></div>
+          </div>
+          <div class="ms-item">
+            <div class="dot du" style="grid-column:6"><i class="i-blue"></i><em>2025.02</em></div>
+            <div class="card down c-blue" style="grid-column:6"><b>达 1 万粉</b>选题库与脚本结构跑通</div>
+          </div>
+          <div class="ms-item">
+            <div class="card up c-violet" style="grid-column:7"><b>突破 100 万粉</b>14 个月，1 万 → 100 万</div>
+            <div class="dot dl" style="grid-column:7"><i class="i-violet"></i><em>2026.04</em></div>
+          </div>
+          <div class="ms-item">
+            <div class="dot du" style="grid-column:8"><i class="i-violet"></i><em>2026.09</em></div>
+            <div class="card down c-rose" style="grid-column:8"><b>184 条 · 6.96 亿播放</b>获赞 1456.86 万</div>
+          </div>
+        </div>
+      </div>
+      <div class="ms-legend">
+        <span><i class="i-amber"></i>网销运营</span>
+        <span><i class="i-green"></i>健康新媒体</span>
+        <span><i class="i-blue"></i>IP 编导</span>
+        <span><i class="i-violet"></i>百万粉节点</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progression -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Progression</span>
+      <h2>进阶路径</h2>
+      <p>每一段经历的核心数据、起作用的关键动作，以及带到下一段的沉淀。</p>
+    </div>
+    <div class="board">
+      <div class="prog-scroll">
+        <div class="prog">
+          <span class="h h1">阶段</span><span class="h h2">核心数据</span><span class="h h3">关键因子</span><span class="h h4">关键沉淀</span>
+
+          <div class="step s1">网销运营<small>2020–2022</small></div>
+          <div class="cell data">单月最高 8 台</div>
+          <div class="cell">三平台报价与车型文章日更；网销热线首呼、到店邀约</div>
+          <div class="cell">线索跟进、平台规则意识、日报表习惯</div>
+
+          <div class="step s2">新媒体运营<small>2022–2024</small></div>
+          <div class="cell data">60w → 83w 粉<br>月均 25 条</div>
+          <div class="cell">节气、饮食、观众提问选题；按数据调整开头与铺垫长度</div>
+          <div class="cell">健康口播选题框架；资料领取、直播预告的私域引导</div>
+
+          <div class="step s3">IP 编导<small>2024–2026</small></div>
+          <div class="cell data">1 万 → 100 万粉<br>6.96 亿播放</div>
+          <div class="cell">处世话题转成角色对话、正反示范、生活场景；设计开头、递进、收尾</div>
+          <div class="cell">爆款拆解方法论；产品卖点转化文案；AI 提效流程</div>
+
+          <div class="step s4">IP 运营<small>下一站</small></div>
+          <div class="cell dashed" style="grid-column:2/5">把选题、脚本、制作、复盘、商单私域整条链路带到新的 IP 上</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Workflow</span>
+      <h2>内容生产与变现链路</h2>
+      <p>我在一条视频上负责的环节，以及数据回来后的去向。</p>
+    </div>
+    <div class="board flow">
+      <div class="flow-scroll">
+        <svg viewBox="0 0 960 300" role="img" aria-label="从选题研究到发布，数据达标则沉淀并对接商单私域，未达标则复盘后回到选题">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+
+          <!-- inputs -->
+          <g class="node"><rect x="120" y="20" width="118" height="34" rx="4"/><text x="179" y="42" text-anchor="middle">用户心理研究</text></g>
+          <g class="node"><rect x="252" y="20" width="96" height="34" rx="4"/><text x="300" y="42" text-anchor="middle">热点追踪</text></g>
+          <path class="edge" d="M179 54 V84 H210 V112" marker-end="url(#ah)"/>
+          <path class="edge" d="M300 54 V84 H234 V112" />
+
+          <g class="term"><rect x="10" y="114" width="96" height="40" rx="20"/><text x="58" y="139" text-anchor="middle">IP 定位</text></g>
+          <path class="edge" d="M106 134 H150" marker-end="url(#ah)"/>
+          <g class="node"><rect x="152" y="114" width="118" height="40" rx="4"/><text x="211" y="139" text-anchor="middle">选题库筛选</text></g>
+          <path class="edge" d="M270 134 H300" marker-end="url(#ah)"/>
+          <g class="node"><rect x="302" y="114" width="118" height="40" rx="4"/><text x="361" y="139" text-anchor="middle">大纲 · 脚本分镜</text></g>
+          <path class="edge" d="M420 134 H450" marker-end="url(#ah)"/>
+          <g class="node"><rect x="452" y="114" width="118" height="40" rx="4"/><text x="511" y="139" text-anchor="middle">拍摄 · 剪辑</text></g>
+          <path class="edge" d="M570 134 H602" marker-end="url(#ah)"/>
+
+          <g class="dec"><path d="M660 98 L716 134 L660 170 L604 134 Z"/><text x="660" y="139" text-anchor="middle">数据达标?</text></g>
+          <text class="lbl" x="728" y="126">是</text>
+          <path class="edge" d="M716 134 H774" marker-end="url(#ah)"/>
+          <g class="term"><rect x="776" y="114" width="172" height="40" rx="20"/><text x="862" y="139" text-anchor="middle">沉淀爆款方法论</text></g>
+
+          <!-- monetise -->
+          <path class="edge" d="M862 154 V196" marker-end="url(#ah)"/>
+          <g class="soft"><rect x="776" y="198" width="80" height="34" rx="4"/><text x="816" y="220" text-anchor="middle">星图商单</text></g>
+          <g class="soft"><rect x="866" y="198" width="82" height="34" rx="4"/><text x="907" y="220" text-anchor="middle">公域转私域</text></g>
+
+          <!-- loop -->
+          <text class="lbl" x="668" y="190">否</text>
+          <path class="edge" d="M660 170 V214" marker-end="url(#ah)"/>
+          <g class="node"><rect x="586" y="216" width="148" height="40" rx="20"/><text x="660" y="241" text-anchor="middle">复盘开头与结构</text></g>
+          <path class="edge" d="M586 236 H211 V156" marker-end="url(#ah)"/>
+          <text class="lbl" x="300" y="228">回到选题，换角度重做</text>
+
+          <!-- note -->
+          <rect class="noteBox" x="10" y="190" width="150" height="96" rx="6"/>
+          <text class="lbl" x="22" y="212">复盘指标</text>
+          <text x="22" y="234">播放 · 点赞</text>
+          <text x="22" y="254">评论 · 收藏</text>
+          <text x="22" y="274">爆款对标拆解</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Signature work</span>
+      <h2>代表作品</h2>
+    </div>
+    <div class="works">
+      <article class="work">
+        <span class="tag">素肌 · 女性成长 IP</span>
+        <h3>《戒掉弱者感！养成女帝心态！》</h3>
+        <div class="nums">
+          <div><span class="v">1.54亿</span><span class="k">播放</span></div>
+          <div><span class="v">429.75万</span><span class="k">点赞</span></div>
+        </div>
+        <p>单条播放约占任职期总播放的 22%。</p>
+      </article>
+      <article class="work">
+        <span class="tag">沐辰健康 · 健康口播</span>
+        <h3>《朱雀汤，冬天的早餐必备》</h3>
+        <div class="nums">
+          <div><span class="v">195w</span><span class="k">播放</span></div>
+          <div><span class="v">1.6w</span><span class="k">点赞</span></div>
+        </div>
+        <p>负责选题与文案策划，节气生活类选题。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Toolkit</span>
+      <h2>方法论与能力</h2>
+    </div>
+    <div class="method">
+      <div class="m"><h3>内容策划</h3><div><p>选题研究、视频脚本与分镜策划，围绕 IP 定位搭建选题库。</p></div></div>
+      <div class="m"><h3>商单私域</h3><div><p>星图商单对接经验，协调 IP 与商务沟通，协助公域线索转私域。</p></div></div>
+      <div class="m"><h3>视频制作</h3><div><p>口播、vlog 剪辑与拍摄协作，处理字幕、金句与封面。</p><div class="tools"><span>剪映</span><span>AI 字幕</span></div></div></div>
+      <div class="m"><h3>数据复盘</h3><div><p>整理播放、点赞、评论、收藏数据，复盘爆款视频。</p><div class="tools"><span>Excel</span><span>飞书</span></div></div></div>
+      <div class="m"><h3>AI 应用</h3><div><p>辅助选题与文案初筛、脚本分镜设计、视频剪辑。</p><div class="tools"><span>GPT</span><span>Claude</span><span>GrokBot</span></div></div></div>
+      <div class="m"><h3>统计背景</h3><div><p>应用统计学本科，持全国市场调查与分析专业技能证书。</p></div></div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Experience</span>
+      <h2>工作经历</h2>
+    </div>
+    <div class="jobs">
+      <div class="job">
+        <div class="when">2024.12 – 2026.09</div>
+        <div>
+          <h3>IP编导<span>素肌（广州）科技有限公司</span></h3>
+          <ul>
+            <li><b>选题策划：</b>围绕女性成长、职场处世及创始人 IP 定位，研究用户心理与热点，筛选选题和表达角度</li>
+            <li><b>脚本创作：</b>撰写大纲及细化脚本，把处世话题转成角色对话、正反示范和生活场景，设计开头、递进与收尾</li>
+            <li><b>产品内容：</b>提炼素肌良品卖点，结合热点和使用场景写转化文案，按平台审核要求核对表达与品牌露出</li>
+            <li><b>编剪与复盘：</b>按脚本剪辑、制作字幕并调节奏；复盘选题、开头与结构，拆解爆款沉淀方法论，用 AI 整体提效</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">2022.10 – 2024.08</div>
+        <div>
+          <h3>新媒体运营<span>沐辰健康管理（武汉）有限公司</span></h3>
+          <ul>
+            <li><b>选题与大纲：</b>健康口播选题策划与大纲梳理，从节气生活、饮食习惯和观众提问中筛选话题，设计开头、解释、场景及结尾</li>
+            <li><b>口播剪辑：</b>IP 口播剪辑与素材整理，核对经典引用及商品信息；结合数据调整开头与铺垫长度</li>
+            <li><b>私域辅助：</b>配合免费资料领取入口与直播预告做内容引导，为客服私域运营提供支持</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">2020.07 – 2022.08</div>
+        <div>
+          <h3>网销运营<span>东风本田凯里德润汽车销售服务有限公司</span></h3>
+          <ul>
+            <li><b>平台运营与线索跟进：</b>维护汽车之家、易车网、懂车帝，更新报价、每日发布车型文章；接听网销热线，完成线索首呼与到店邀约，每日提交网销及集团报表</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="foot">
+    <div class="board">
+      <h3>教育经历</h3>
+      <p><b>湖北大学</b> · 数学与统计学学院</p>
+      <p style="color:var(--muted);font-size:14px">本科 · 应用统计学 · <span class="num">2016–2020</span></p>
+    </div>
+    <div class="board">
+      <h3>资格证书</h3>
+      <div class="certs"><span>CET-4</span><span>普通话二级甲等</span><span>C2 驾驶证</span><span>全国市场调查与分析专业技能证书</span></div>
+    </div>
+  </section>
+
+  <p class="portfolio">完整作品集（账号主页、受众画像、竞品拆解、选题库、脚本分镜）：<a href="https://aapsyyjippl.feishu.cn/docx/UxLsdS4T7obSZLxEuIbcV3uDnuh" target="_blank" rel="noopener">飞书 · 方世云-IP编导-作品集</a></p>
+</main>
+
+
+</body></html>
