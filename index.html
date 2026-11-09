@@ -286,6 +286,7 @@ p{margin:0}
 .tool header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .tool h3{font-family:var(--f-display);font-size:28px;font-weight:900}
 .tool p{font-size:14px;color:var(--muted)}
+.tool.wide{grid-column:1/-1}
 
 /* footer */
 .foot{margin-top:140px;border-top:1px solid var(--line);padding-block:80px 56px}
@@ -707,7 +708,7 @@ p{margin:0}
       <div class="ch-head rv">
         <span class="ch-num" aria-hidden="true">07</span>
         <div><div class="ch-tag">CH.07<span>AI</span></div><h2>关于 AI</h2></div>
-        <p>用 Claude Code 和 Codex 把重复的活交给工具：抓数据、拆爆款、写分镜、做封面。下面是我的知识库、技能库，以及顺手做的两个小工具。</p>
+        <p>用 Claude Code 和 Codex 把重复的活交给工具：抓数据、拆爆款、写分镜、做封面。下面是我的知识库、技能库，以及顺手做的三个小工具。</p>
       </div>
 
       <div class="sub first"><h3>个人知识库与学习库 <span class="mono">KNOWLEDGE</span></h3></div>
@@ -726,7 +727,7 @@ p{margin:0}
         </div>
       </div>
 
-      <div class="sub"><h3>AI 小工具 <span class="mono">2 APPS</span></h3></div>
+      <div class="sub"><h3>AI 小工具 <span class="mono">3 APPS</span></h3></div>
       <div class="tools rv">
         <article class="tool">
           <header><h3>月有数</h3><a class="link" href="yueyoushu/" target="_blank" rel="noopener">打开 ↗</a></header>
@@ -737,6 +738,18 @@ p{margin:0}
           <header><h3>栖页</h3><a class="link" href="qiye/" target="_blank" rel="noopener">打开 ↗</a></header>
           <p>个人文档库：像写文档一样记录，支持 Markdown，图片随手贴进来。</p>
           <div data-gallery><figure class="shot"><button type="button"><img src="assets/web/30.jpg" alt="栖页界面" loading="lazy" width="1800" height="919"></button></figure></div>
+        </article>
+        <article class="tool wide">
+          <header><h3>大纲转手写笔记</h3><a class="link" href="https://mona-ziranyun.github.io/handnote/" target="_blank" rel="noopener">打开 ↗</a></header>
+          <p>把课程大纲或 Markdown 一键排成手账风笔记：自动配图标和重点框，可换纸张、墨水配色和手写字体，导出 PNG。</p>
+          <div class="rec-grid">
+            <div class="player"><span class="vlabel">SCREEN REC · 00:54</span>
+              <video src="assets/video/handnote.mp4" poster="assets/video/handnote.jpg" controls muted playsinline preload="metadata"></video></div>
+            <div class="thumb" data-gallery>
+              <figure class="shot"><button type="button"><img src="assets/web/handnote.jpg" alt="大纲转手写笔记界面" loading="lazy" width="1800" height="930"></button>
+                <figcaption><span class="mono">UI</span>左侧编辑大纲，中间实时预览，右侧调字体、字号和导出清晰度</figcaption></figure>
+            </div>
+          </div>
         </article>
       </div>
     </div>
