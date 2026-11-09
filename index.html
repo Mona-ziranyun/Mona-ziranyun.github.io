@@ -286,7 +286,6 @@ p{margin:0}
 .tool header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .tool h3{font-family:var(--f-display);font-size:28px;font-weight:900}
 .tool p{font-size:14px;color:var(--muted)}
-.tool.wide{grid-column:1/-1}
 
 /* footer */
 .foot{margin-top:140px;border-top:1px solid var(--line);padding-block:80px 56px}
@@ -732,34 +731,44 @@ p{margin:0}
         <article class="tool">
           <header><h3>月有数</h3><a class="link" href="yueyoushu/" target="_blank" rel="noopener">打开 ↗</a></header>
           <p>一张日历看清每天花了多少：余额、欠款待收回、本月预计开销，数据只存在自己浏览器里。</p>
-          <div data-gallery><figure class="shot"><button type="button"><img src="assets/web/29.jpg" alt="月有数界面" loading="lazy" width="1800" height="917"></button></figure></div>
+          <div class="rec-grid">
+            <div class="player"><span class="vlabel">SCREEN REC · 00:40</span>
+              <video src="assets/video/yueyoushu.mp4" poster="assets/video/yueyoushu.jpg" controls muted playsinline preload="metadata"></video></div>
+            <div class="thumb" data-gallery>
+              <figure class="shot"><button type="button"><img src="assets/web/29.jpg" alt="月有数界面" loading="lazy" width="1800" height="917"></button></figure>
+            </div>
+          </div>
         </article>
         <article class="tool">
           <header><h3>栖页</h3><a class="link" href="qiye/" target="_blank" rel="noopener">打开 ↗</a></header>
           <p>个人文档库：像写文档一样记录，支持 Markdown，图片随手贴进来。</p>
-          <div data-gallery><figure class="shot"><button type="button"><img src="assets/web/30.jpg" alt="栖页界面" loading="lazy" width="1800" height="919"></button></figure></div>
+          <div class="rec-grid">
+            <div class="player"><span class="vlabel">SCREEN REC · 01:46</span>
+              <video src="assets/video/qiye.mp4" poster="assets/video/qiye.jpg" controls muted playsinline preload="metadata"></video></div>
+            <div class="thumb" data-gallery>
+              <figure class="shot"><button type="button"><img src="assets/web/30.jpg" alt="栖页界面" loading="lazy" width="1800" height="919"></button></figure>
+            </div>
+          </div>
         </article>
-        <article class="tool wide">
+        <article class="tool">
           <header><h3>手绘笔记</h3><a class="link" href="https://mona-ziranyun.github.io/handnote/" target="_blank" rel="noopener">打开 ↗</a></header>
           <p>把课程大纲或 Markdown 一键排成手账风笔记：自动配图标和重点框，可换纸张、墨水配色和手写字体，导出 PNG。</p>
           <div class="rec-grid">
             <div class="player"><span class="vlabel">SCREEN REC · 00:54</span>
               <video src="assets/video/handnote.mp4" poster="assets/video/handnote.jpg" controls muted playsinline preload="metadata"></video></div>
             <div class="thumb" data-gallery>
-              <figure class="shot"><button type="button"><img src="assets/web/handnote.jpg" alt="大纲转手写笔记界面" loading="lazy" width="1800" height="930"></button>
-                <figcaption><span class="mono">UI</span>左侧编辑大纲，中间实时预览，右侧调字体、字号和导出清晰度</figcaption></figure>
+              <figure class="shot"><button type="button"><img src="assets/web/handnote.jpg" alt="大纲转手写笔记界面" loading="lazy" width="1800" height="930"></button></figure>
             </div>
           </div>
         </article>
-        <article class="tool wide">
+        <article class="tool">
           <header><h3>一朵云实验室</h3><a class="link" href="https://yiduoyun.pplx.app/" target="_blank" rel="noopener">打开 ↗</a></header>
-          <p>一朵可以拖动旋转、滚轮缩放的 3D 云：切换晴朗、多云、下雨、雷暴、下雪，调云朵颜色、透明度和蓬松度。</p>
+          <p>一朵可以拖动旋转、滚轮缩放的 3D 云：切换晴朗、多云、下雨、雷暴、下雪，调颜色、透明度和蓬松度。</p>
           <div class="rec-grid">
             <div class="player"><span class="vlabel">SCREEN REC · 00:31</span>
               <video src="assets/video/yiduoyun.mp4" poster="assets/video/yiduoyun.jpg" controls muted playsinline preload="metadata"></video></div>
             <div class="thumb" data-gallery>
-              <figure class="shot"><button type="button"><img src="assets/web/yiduoyun.jpg" alt="一朵云实验室下雨天气" loading="lazy" width="1800" height="914"></button>
-                <figcaption><span class="mono">UI</span>右侧面板切换天气、云朵颜色、透明度与蓬松度</figcaption></figure>
+              <figure class="shot"><button type="button"><img src="assets/web/yiduoyun.jpg" alt="一朵云实验室下雨天气" loading="lazy" width="1800" height="914"></button></figure>
             </div>
           </div>
         </article>
