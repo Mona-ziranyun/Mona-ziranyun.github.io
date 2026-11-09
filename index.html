@@ -167,6 +167,15 @@ p{margin:0}
 .media-grid .shot a.cover:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .media-grid .shot a.cover::after{content:"打开主页 ↗";position:absolute;right:12px;bottom:12px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
 .media-grid .shot a.cover:hover::after,.media-grid .shot a.cover:focus-visible::after{opacity:1}
+.reel-track.mix{align-items:flex-start;--h:clamp(220px,26vw,320px)}
+.reel-track.mix .shot{width:calc(var(--h) * var(--r));flex:none}
+.reel-track.mix .shot a.cover{display:block;height:var(--h);border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);position:relative;-webkit-user-drag:none}
+.reel-track.mix .shot a.cover img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.reel-track.mix .shot a.cover:hover img{transform:scale(1.015)}
+.reel-track.mix .shot a.cover:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.reel-track.mix .shot a.cover::after{content:"打开 ↗";position:absolute;right:10px;bottom:10px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
+.reel-track.mix .shot a.cover:hover::after{opacity:1}
+.reel.drag a{pointer-events:none}
 .works-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .works-row .shot a.cover{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);position:relative}
 .works-row .shot a.cover img{display:block;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -804,33 +813,33 @@ p{margin:0}
         <div><div class="ch-tag">CH.08<span>My Media</span></div><h2>我的自媒体</h2></div>
         <p>工作之外，我也在自己做账号：健康内容同步到抖音、小红书和公众号，另有一个 AI 科普账号。从选题、封面到发布都是自己完成。</p>
       </div>
-      <div class="sub first"><h3>账号主页 <span class="mono">6 ACCOUNTS</span></h3></div>
-      <div class="media-grid rv">
-        <figure class="shot"><a class="cover" href="https://www.douyin.com/user/MS4wLjABAAAA1v87IPdzbRIw7onBphWKt-j-P77iHx7Jatvw2VV_qwCvq0gzuK1dTDXDHfwVBwqi" target="_blank" rel="noopener"><img src="assets/web/media-1.jpg" alt="抖音账号 自然云聊健康 主页" loading="lazy" width="1800" height="996"></a>
+      <div class="sub first"><h3>自然云 · 健康科普 <span class="mono">3 ACCOUNTS · 2 WORKS</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelZ" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelZ" data-step="1" aria-label="向右">›</button></div></div>
+      <div class="reel rv" id="reelZ" data-dir="1"><div class="reel-track mix">
+        <figure class="shot" style="--r:1.807"><a class="cover" draggable="false" href="https://www.douyin.com/user/MS4wLjABAAAA1v87IPdzbRIw7onBphWKt-j-P77iHx7Jatvw2VV_qwCvq0gzuK1dTDXDHfwVBwqi" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-1.jpg" alt="抖音账号 自然云聊健康 主页" loading="lazy" width="1800" height="996"></a>
           <figcaption><span class="pf-meta"><b>抖音 · 自然云聊健康</b><span>27 条作品 · 健康科普</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://www.douyin.com/user/MS4wLjABAAAAHoxGCXYB1H1GmqNjvk8Ywlf6AdlrdGXCXRW0gqUunMs" target="_blank" rel="noopener"><img src="assets/web/media-2.jpg" alt="抖音账号 Joey说AI 主页" loading="lazy" width="1800" height="996"></a>
-          <figcaption><span class="pf-meta"><b>抖音 · Joey说AI</b><span>6 条作品 · AI 科普</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://www.xiaohongshu.com/user/profile/66219ebe000000000b030991" target="_blank" rel="noopener"><img src="assets/web/media-3.jpg" alt="小红书账号 自然云说 主页" loading="lazy" width="1800" height="904"></a>
+        <figure class="shot" style="--r:1.991"><a class="cover" draggable="false" href="https://www.xiaohongshu.com/user/profile/66219ebe000000000b030991" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-3.jpg" alt="小红书账号 自然云说 主页" loading="lazy" width="1800" height="904"></a>
           <figcaption><span class="pf-meta"><b>小红书 · 自然云说</b><span>健康图文笔记</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://www.xiaohongshu.com/user/profile/65824fbc000000001902cffc" target="_blank" rel="noopener"><img src="assets/web/media-6.jpg" alt="小红书账号 Joey说AI 主页" loading="lazy" width="1800" height="913"></a>
-          <figcaption><span class="pf-meta"><b>小红书 · Joey说AI</b><span>AI 科普图文</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://mp.weixin.qq.com/s/miRBlrnaz7nqQ7ojOJAa2Q" target="_blank" rel="noopener"><img src="assets/web/media-4.jpg" alt="公众号 自然云说 后台" loading="lazy" width="1800" height="926"></a>
+        <figure class="shot" style="--r:1.944"><a class="cover" draggable="false" href="https://mp.weixin.qq.com/s/miRBlrnaz7nqQ7ojOJAa2Q" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-4.jpg" alt="公众号 自然云说 后台" loading="lazy" width="1800" height="926"></a>
           <figcaption><span class="pf-meta"><b>公众号 · 自然云说</b><span>33 篇原创</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://mp.weixin.qq.com/s/ScW28QlaGA72CmTsMCVC7A" target="_blank" rel="noopener"><img src="assets/web/media-5.jpg" alt="公众号 Joey说AI 发表记录" loading="lazy" width="1800" height="929"></a>
-          <figcaption><span class="pf-meta"><b>公众号 · Joey说AI</b><span>7 篇文章 · AI 科普</span></span></figcaption></figure>
-      </div>
-
-      <div class="sub"><h3>代表作品 <span class="mono">4 WORKS · 抖音</span></h3></div>
-      <div class="works-row rv">
-        <figure class="shot"><a class="cover" href="https://v.douyin.com/52QbSP6jhvo/" target="_blank" rel="noopener"><img src="assets/web/work-1.jpg" alt="一年12个月吃什么菜？每个月记两样就够" loading="lazy" width="900" height="1200"></a>
+        <figure class="shot" style="--r:0.750"><a class="cover" draggable="false" href="https://v.douyin.com/52QbSP6jhvo/" target="_blank" rel="noopener"><img draggable="false" src="assets/web/work-1.jpg" alt="一年12个月吃什么菜？每个月记两样就够" loading="lazy" width="900" height="1200"></a>
           <figcaption><span class="pf-meta"><b>一年12个月吃什么菜？每个月记两样就够</b><span>自然云聊健康 · 时令蔬菜</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://v.douyin.com/7mHOMYuuoZc/" target="_blank" rel="noopener"><img src="assets/web/work-2.jpg" alt="贵的坚果，真的更有营养吗？" loading="lazy" width="900" height="1200"></a>
+        <figure class="shot" style="--r:0.750"><a class="cover" draggable="false" href="https://v.douyin.com/7mHOMYuuoZc/" target="_blank" rel="noopener"><img draggable="false" src="assets/web/work-2.jpg" alt="贵的坚果，真的更有营养吗？" loading="lazy" width="900" height="1200"></a>
           <figcaption><span class="pf-meta"><b>贵的坚果，真的更有营养吗？</b><span>自然云聊健康 · 坚果科普</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://v.douyin.com/bOHXJ-gly14/" target="_blank" rel="noopener"><img src="assets/web/work-3.jpg" alt="别再一条条问AI了：飞书表格加一列，100条一次跑完" loading="lazy" width="900" height="1200"></a>
+      </div></div>
+
+      <div class="sub"><h3>Joey说AI · AI 科普 <span class="mono">3 ACCOUNTS · 2 WORKS</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelJ" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelJ" data-step="1" aria-label="向右">›</button></div></div>
+      <div class="reel rv" id="reelJ" data-dir="-1"><div class="reel-track mix">
+        <figure class="shot" style="--r:1.807"><a class="cover" draggable="false" href="https://www.douyin.com/user/MS4wLjABAAAAHoxGCXYB1H1GmqNjvk8Ywlf6AdlrdGXCXRW0gqUunMs" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-2.jpg" alt="抖音账号 Joey说AI 主页" loading="lazy" width="1800" height="996"></a>
+          <figcaption><span class="pf-meta"><b>抖音 · Joey说AI</b><span>6 条作品 · AI 科普</span></span></figcaption></figure>
+        <figure class="shot" style="--r:1.972"><a class="cover" draggable="false" href="https://www.xiaohongshu.com/user/profile/65824fbc000000001902cffc" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-6.jpg" alt="小红书账号 Joey说AI 主页" loading="lazy" width="1800" height="913"></a>
+          <figcaption><span class="pf-meta"><b>小红书 · Joey说AI</b><span>AI 科普图文</span></span></figcaption></figure>
+        <figure class="shot" style="--r:1.938"><a class="cover" draggable="false" href="https://mp.weixin.qq.com/s/ScW28QlaGA72CmTsMCVC7A" target="_blank" rel="noopener"><img draggable="false" src="assets/web/media-5.jpg" alt="公众号 Joey说AI 发表记录" loading="lazy" width="1800" height="929"></a>
+          <figcaption><span class="pf-meta"><b>公众号 · Joey说AI</b><span>7 篇文章 · AI 科普</span></span></figcaption></figure>
+        <figure class="shot" style="--r:0.750"><a class="cover" draggable="false" href="https://v.douyin.com/bOHXJ-gly14/" target="_blank" rel="noopener"><img draggable="false" src="assets/web/work-3.jpg" alt="别再一条条问AI了：飞书表格加一列，100条一次跑完" loading="lazy" width="900" height="1200"></a>
           <figcaption><span class="pf-meta"><b>别再一条条问AI了：飞书表格加一列，100条一次跑完</b><span>Joey说AI · 飞书教程</span></span></figcaption></figure>
-        <figure class="shot"><a class="cover" href="https://v.douyin.com/UIA1klfxJc4/" target="_blank" rel="noopener"><img src="assets/web/work-4.jpg" alt="截止2026年，国内外的AI公司都有谁" loading="lazy" width="900" height="1200"></a>
+        <figure class="shot" style="--r:0.750"><a class="cover" draggable="false" href="https://v.douyin.com/UIA1klfxJc4/" target="_blank" rel="noopener"><img draggable="false" src="assets/web/work-4.jpg" alt="截止2026年，国内外的AI公司都有谁" loading="lazy" width="900" height="1200"></a>
           <figcaption><span class="pf-meta"><b>截止2026年，国内外的AI公司都有谁</b><span>Joey说AI · 《回车之后》第 1 期</span></span></figcaption></figure>
-      </div>
+      </div></div>
     </div>
   </section>
 
