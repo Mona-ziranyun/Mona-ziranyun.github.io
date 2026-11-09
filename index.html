@@ -176,6 +176,17 @@ p{margin:0}
 .reel-track.mix .shot a.cover::after{content:"打开 ↗";position:absolute;right:10px;bottom:10px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
 .reel-track.mix .shot a.cover:hover::after{opacity:1}
 .reel.drag a{pointer-events:none}
+.rec-grid.apps{grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:start}
+.player-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px}
+.app-grid .shot button{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;border-radius:10px}
+.app-grid .shot button img{width:100%;height:100%;object-fit:contain}
+.app-grid .shot figcaption{flex-direction:column;gap:2px;font-size:12px}
+.app-name{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-size:14px}
+.app-name img{width:22px;height:22px;border-radius:5px;flex:none}
+.app-cap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:0}
+.app-desc{color:var(--muted)}
+@media (max-width:760px){.rec-grid.apps{grid-template-columns:1fr}}
 .works-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .works-row .shot a.cover{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);position:relative}
 .works-row .shot a.cover img{display:block;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -742,10 +753,29 @@ p{margin:0}
       <div class="ch-head rv">
         <span class="ch-num" aria-hidden="true">07</span>
         <div><div class="ch-tag">CH.07<span>AI</span></div><h2>关于 AI</h2></div>
-        <p>用 Claude Code 和 Codex 把重复的活交给工具：抓数据、拆爆款、写分镜、做封面。下面是我的视频制作技能库，以及顺手做的几个小工具。</p>
+        <p>用 Claude Code 和 Codex 把重复的活交给工具：抓数据、拆爆款、写分镜、做封面。下面是我日常在用的 AI 软件、视频制作技能库，以及顺手做的几个小工具。</p>
       </div>
 
-      <div class="sub first"><h3>AI 视频制作 Skill <span class="mono">OBSIDIAN</span></h3></div>
+      <div class="sub first"><h3>AI 软件应用 <span class="mono">5 APPS</span></h3></div>
+      <div class="rec-grid apps rv">
+        <div class="player-col">
+          <div class="player"><span class="vlabel">SCREEN REC · 01:14</span>
+            <video src="assets/video/grokbot.mp4" poster="assets/video/grokbot.jpg" controls muted playsinline preload="metadata"></video></div>
+          <p class="app-cap"><span class="app-name"><img src="assets/icons/grokbot.png" alt="" width="28" height="28"><b>Grok Bot</b></span><span class="app-desc">用 Grok Bot 做视频的全过程录屏</span></p>
+        </div>
+        <div class="app-grid" data-gallery>
+            <figure class="shot"><button type="button"><img src="assets/web/app-1.jpg" alt="Codex 定时任务生成的 AI 早报" loading="lazy" width="1800" height="1068"></button>
+              <figcaption><span class="app-name"><img src="assets/icons/codex.png" alt="" width="28" height="28"><b>Codex</b></span><span class="app-desc">AIHOT 每日早报、晚报定时任务</span></figcaption></figure>
+            <figure class="shot"><button type="button"><img src="assets/web/app-2.jpg" alt="Claude Code 每日使用总结" loading="lazy" width="1800" height="1065"></button>
+              <figcaption><span class="app-name"><img src="assets/icons/claude.png" alt="" width="28" height="28"><b>Claude Code</b></span><span class="app-desc">每晚 23:59 自动写当天使用总结</span></figcaption></figure>
+            <figure class="shot"><button type="button"><img src="assets/web/app-3.jpg" alt="豆包工作 定时推送总结" loading="lazy" width="1800" height="1065"></button>
+              <figcaption><span class="app-name"><img src="assets/icons/doubao.png" alt="" width="28" height="28"><b>豆包工作</b></span><span class="app-desc">定时推送当天对话总结</span></figcaption></figure>
+            <figure class="shot"><button type="button"><img src="assets/web/app-4.jpg" alt="WorkBuddy AI 首页" loading="lazy" width="1800" height="1199"></button>
+              <figcaption><span class="app-name"><img src="assets/icons/workbuddy.png" alt="" width="28" height="28"><b>WorkBuddy AI</b></span><span class="app-desc">办公与开发任务助手</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="sub"><h3>AI 视频制作 Skill <span class="mono">OBSIDIAN</span></h3></div>
       <div class="rec-grid rv">
         <div class="player"><span class="vlabel">SCREEN REC · 00:40</span>
           <video src="assets/video/skills.mp4" poster="assets/video/skills.jpg" controls muted playsinline preload="metadata"></video></div>
