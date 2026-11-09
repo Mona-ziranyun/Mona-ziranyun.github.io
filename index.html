@@ -160,6 +160,10 @@ p{margin:0}
 .shot button::after{content:"点击放大";position:absolute;right:12px;bottom:12px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#f4ece2;opacity:0;transition:opacity .25s}
 .shot button:hover::after{opacity:1}
 .shot figcaption{font-size:14px;color:var(--muted);display:flex;gap:12px;align-items:baseline}
+.media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}
+.media-grid .shot button{aspect-ratio:1800/996;display:flex;align-items:center;justify-content:center}
+.media-grid .shot button img{width:100%;height:100%;object-fit:contain}
+@media (max-width:640px){.media-grid{grid-template-columns:1fr}}
 .shot figcaption .mono{color:var(--amber);font-size:11px;flex:none;letter-spacing:.06em}
 
 .grid-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
@@ -784,8 +788,8 @@ p{margin:0}
         <div><div class="ch-tag">CH.08<span>My Media</span></div><h2>我的自媒体</h2></div>
         <p>工作之外，我也在自己做账号：健康内容同步到抖音、小红书和公众号，另有一个 AI 科普账号。从选题、封面到发布都是自己完成。</p>
       </div>
-      <div class="sub first"><h3>账号主页 <span class="mono">4 ACCOUNTS</span></h3><div class="reel-ctrl"><button type="button" class="rc" data-reel="reelC" data-step="-1" aria-label="向左">‹</button><button type="button" class="rc" data-reel="reelC" data-step="1" aria-label="向右">›</button></div></div>
-      <div class="reel rv" id="reelC" data-dir="1"><div class="reel-track land" data-gallery>
+      <div class="sub first"><h3>账号主页 <span class="mono">4 ACCOUNTS</span></h3></div>
+      <div class="media-grid rv" data-gallery>
         <figure class="shot"><button type="button"><img src="assets/web/media-1.jpg" alt="抖音账号 自然云聊健康 主页" loading="lazy" width="1800" height="996"></button>
           <figcaption><span class="pf-meta"><b>抖音 · 自然云聊健康</b><span>27 条作品 · 健康科普</span></span></figcaption></figure>
         <figure class="shot"><button type="button"><img src="assets/web/media-3.jpg" alt="小红书账号 自然云说 主页" loading="lazy" width="1800" height="904"></button>
@@ -794,7 +798,7 @@ p{margin:0}
           <figcaption><span class="pf-meta"><b>公众号 · 自然云说</b><span>33 篇原创</span></span></figcaption></figure>
         <figure class="shot"><button type="button"><img src="assets/web/media-2.jpg" alt="抖音账号 Joey说AI 主页" loading="lazy" width="1800" height="996"></button>
           <figcaption><span class="pf-meta"><b>抖音 · Joey说AI</b><span>6 条作品 · AI 科普</span></span></figcaption></figure>
-      </div></div>
+      </div>
     </div>
   </section>
 
